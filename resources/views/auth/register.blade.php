@@ -54,6 +54,17 @@
                     </div><!-- col -->
                 </div><!-- row -->
 
+                <div class="form-group">
+                    <label class="form-control-label">USSF Grade:</label>
+                    <input type="number" name="ussf_grade" class="form-control{{ $errors->has('ussf_grade') ? ' is-invalid' : '' }}" value="{{ old('ussf_grade') }}">
+
+                    @if ($errors->has('ussf_grade'))
+                        <span class="invalid-feedback">
+                            <strong>{{ $errors->first('ussf_grade') }}</strong>
+                        </span>
+                    @endif
+                </div><!-- form-group -->
+
                 <div class="row row-xs">
                     <div class="col-sm">
                         <div class="form-group">

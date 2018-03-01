@@ -13,16 +13,12 @@
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function() {
-        return view('pages.home');
-    })->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('/profile', function() {
-        return view('pages.profile');
-    })->name('profile');
+    Route::get('/profile', 'ProfileController@index')->name('profile');
 
-    Route::resource('log-game', 'GameController');
+    Route::resource('game', 'GameController');
+    Route::resource('payment', 'PaymentController');
+    Route::resource('mileage', 'MileageController');
 });

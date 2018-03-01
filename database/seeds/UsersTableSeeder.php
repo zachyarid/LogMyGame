@@ -13,7 +13,8 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             ['fname' => 'Zach', 'lname' => 'Yarid', 'email' => 'zach.yarid@gmail.com', 'password' => bcrypt('secret'), 'ussf_grade' => 6],
-            ['fname' => 'Test', 'lname' => 'Account', 'email' => 'test@logmygame.me', 'password' => bcrypt('secret'), 'ussf_grade' => 7]
+            ['fname' => 'Test', 'lname' => 'Account', 'email' => 'test@logmygame.me', 'password' => bcrypt('secret'), 'ussf_grade' => 7],
+            ['fname' => 'Colin', 'lname' => 'Yarid', 'email' => 'colin.yarid11@gmail.com', 'password' => bcrypt('secret'), 'ussf_grade' => 8]
         ]);
     }
 }

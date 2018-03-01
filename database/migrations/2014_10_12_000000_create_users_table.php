@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('lname');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('ussf_grade')->nullable();
+            $table->integer('ussf_grade')->default(0);
             $table->integer('status')->default(1);
             $table->rememberToken();
             $table->timestamps();

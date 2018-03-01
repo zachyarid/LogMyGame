@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-    <form method="POST" action="{{ route('log-game.store') }}">
+    <form method="POST" action="{{ route('game.store') }}">
         @csrf
         <input type="hidden" name="platform" value="{{ Browser::browserFamily() }}"/>
 
@@ -313,8 +313,8 @@
         <!-- another row -->
         <div class="card pd-20 pd-sm-40 mg-t-20">
             <div class="form-layout-footer">
-                <button class="btn btn-default">Log Game</button>
-                <button type="reset" class="btn btn-default" >Reset Form</button>
+                <button class="btn btn-default mg-r-5">Log Game</button>
+                <button type="reset" class="btn btn-secondary" >Reset Form</button>
             </div><!-- form-layout-footer -->
         </div>
     </form>

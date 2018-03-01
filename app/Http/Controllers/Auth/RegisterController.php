@@ -51,6 +51,7 @@ class RegisterController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'ussf_grade' => 'min:0|max:9',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -67,6 +68,7 @@ class RegisterController extends Controller
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'email' => $data['email'],
+            'ussf_grade' => ($data['ussf_grade'] == null ? 0 : $data['ussf_grade']),
             'password' => bcrypt($data['password']),
         ]);
     }

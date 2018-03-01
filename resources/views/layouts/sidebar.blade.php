@@ -22,9 +22,35 @@
         </li><!-- nav-item -->
 
         <li class="nav-item">
-            <a href="{{ route('log-game.index') }}" class="nav-link">
+            <a href="" class="nav-link with-sub">
+                <i class="fa fa-eye"></i>
+                <span>View</span>
+            </a>
+            <ul class="nav-sub" style="display: none;">
+                <li class="nav-item"><a href="{{ route('game.index') }}" class="nav-link">Games</a></li>
+                <li class="nav-item"><a href="{{ route('payment.index') }}" class="nav-link">Payments</a></li>
+                <li class="nav-item"><a href="{{ route('mileage.index') }}" class="nav-link">Mileage Logs</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('game.create') }}" class="nav-link">
                 <i class="fa fa-plus"></i>
                 <span>Log A Game</span>
+            </a>
+        </li><!-- nav-item -->
+
+        <li class="nav-item">
+            <a href="{{ route('payment.create') }}" class="nav-link">
+                <i class="fa fa-money"></i>
+                <span>Log A Payment</span>
+            </a>
+        </li><!-- nav-item -->
+
+        <li class="nav-item">
+            <a href="{{ route('mileage.create') }}" class="nav-link">
+                <i class="fa fa-automobile"></i>
+                <span>Log Mileage</span>
             </a>
         </li><!-- nav-item -->
     </ul>

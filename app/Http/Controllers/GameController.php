@@ -9,7 +9,6 @@ use App\Http\Requests\GameController\GameCreateRequest as MyRequest;
 
 class GameController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,7 +23,7 @@ class GameController extends Controller
     {
         $gametypes = DB::table('game_types')->get();
 
-        return view('pages.log-game', ['gametypes' => $gametypes]);
+        return view('pages.game.view-game', ['gametypes' => $gametypes]);
     }
 
     /**
@@ -36,7 +35,7 @@ class GameController extends Controller
     {
         $gametypes = DB::table('game_types')->get();
 
-        return view('pages.log-game', ['gametypes' => $gametypes]);
+        return view('pages.game.log-game', ['gametypes' => $gametypes]);
     }
 
     /**
@@ -69,7 +68,7 @@ class GameController extends Controller
             'ussf_grade' => \Auth::user()->ussf_grade,
         ]);
 
-        return redirect('/')->with('message', 'Game added!');
+        return redirect('/game')->with('message', 'Game added!');
 
     }
 
