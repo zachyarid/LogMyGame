@@ -3,8 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Meta -->
-<meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
-<meta name="author" content="ThemePixels">
+<meta name="description" content="A simple, convenient way to log your games">
+<meta name="author" content="Zach Yarid">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>{{ env('APP_NAME') }}</title>
 

@@ -22,5 +22,9 @@
     @hasSection('script-source')
         @yield ('script-source')
     @endif
+
+    @hasSection('modals')
+        @yield('modals')
+    @endif
     </body>
 </html>

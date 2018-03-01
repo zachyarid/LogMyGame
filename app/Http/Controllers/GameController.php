@@ -21,9 +21,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        $gametypes = DB::table('game_types')->get();
 
-        return view('pages.game.view-game', ['gametypes' => $gametypes]);
+        return view('pages.game.view-game');
     }
 
     /**
@@ -33,9 +32,14 @@ class GameController extends Controller
      */
     public function create()
     {
-        $gametypes = DB::table('game_types')->get();
+        $data = [
+            'gametypes' => DB::table('game_types')->get(),
+            'gamelocs' => DB::table('game_locations')->get(),
+            'ages' => DB::table('ages')->get(),
+        ];
 
-        return view('pages.game.log-game', ['gametypes' => $gametypes]);
+
+        return view('pages.game.log-game', $data);
     }
 
     /**

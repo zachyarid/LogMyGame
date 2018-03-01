@@ -49,7 +49,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="game_type">Game Type: <span
                                     class="tx-danger">*</span></label>
-                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                        <div class="col-sm-6 mg-t-10 mg-sm-t-0">
                             <select name="game_type" id="game_type"
                                     class="form-control{{ $errors->has('game_type') ? ' is-invalid' : '' }}">
                                 <option selected disabled value="">Select a Game Type</option>
@@ -70,18 +70,27 @@
                         </span>
                             @endif
                         </div>
+                        <div class="col-sm-2 mg-t-10 mg-sm-t-0 ">
+                            <a href="" class="btn btn-primary pd-x-20" data-toggle="modal" data-target="#gametypemodal">Add</a>
+                        </div>
                     </div><!-- row -->
 
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="location">Game Location: <span
                                     class="tx-danger">*</span></label>
-                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                        <div class="col-sm-6 mg-t-10 mg-sm-t-0">
                             <select name="location" id="location"
                                     class="form-control{{ $errors->has('location') ? ' is-invalid' : '' }}">
                                 <option selected disabled value="">Select a Location</option>
-                                <option value="1">Richard Siegel Soccer Complex</option>
-                                <option value="2">Mike Rose Soccer Park</option>
-                                <option value="3">Metro Park</option>
+                                @if (count($gamelocs) > 0)
+                                    @foreach ($gamelocs as $loc)
+                                        @if ($loc->id == old('location'))
+                                            <option selected value="{{ $loc->id }}">{{ $loc->location }}</option>
+                                        @else
+                                            <option value="{{ $loc->id }}">{{ $loc->location }}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </select>
 
                             @if ($errors->has('location'))
@@ -89,6 +98,9 @@
                                     <strong>{{ $errors->first('location') }}</strong>
                                 </span>
                             @endif
+                        </div>
+                        <div class="col-sm-2 mg-t-10 mg-sm-t-0 ">
+                            <a href="" class="btn btn-primary pd-x-20" data-toggle="modal" data-target="#gamelocmodal">Add</a>
                         </div>
                     </div>
 
@@ -99,11 +111,15 @@
                             <select name="age" id="age"
                                     class="form-control{{ $errors->has('age') ? ' is-invalid' : '' }}">
                                 <option selected disabled value="">Select an Age</option>
-                                <option value="17">U17B</option>
-                                <option value="17">U17G</option>
-                                <option value="18">U18B</option>
-                                <option value="18">U18G</option>
-                                <option value="20">Adult</option>
+                                @if (count($ages) > 0)
+                                    @foreach ($ages as $a)
+                                        @if ($a->id == old('age'))
+                                            <option selected value="{{ $a->id }}">{{ $a->string }}</option>
+                                        @else
+                                            <option value="{{ $a->id }}">{{ $a->string }}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </select>
 
                             @if ($errors->has('age'))
@@ -335,5 +351,75 @@
                 height: 150
             })
         });
+
+        function submitLocPost()
+        {
+            var gameloc = $('#location_add').val();
+
+            $.ajax({
+                type: "POST",
+                url: '/gamelocation/add',
+                data: {
+                    location: gameloc,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (data) {
+                    console.log(data);
+
+                    location.reload();
+                }
+            });
+        }
     </script>
+@endsection
+
+@section('modals')
+    <div id="gametypemodal" class="modal fade show" style="display: none;">
+        <div class="modal-dialog modal-dialog-vertical-center" role="document">
+            <div class="modal-content bd-0 tx-14">
+                <div class="modal-header pd-y-20 pd-x-25">
+                    <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Add a Game Type</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body pd-25">
+                    <form method="POST" action="">
+
+                    </form>
+                    <h4 class="lh-3 mg-b-20"><a href="" class="tx-inverse hover-primary">Why We Use Electoral College, Not Popular Vote</a></h4>
+                    <p class="mg-b-5">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pd-x-20">Add Game Type</button>
+                    <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div><!-- modal-dialog -->
+    </div>
+
+    <div id="gamelocmodal" class="modal fade show" style="display: none;">
+        <div class="modal-dialog modal-dialog-vertical-center" role="document">
+            <div class="modal-content bd-0 tx-14">
+                <div class="modal-header pd-y-20 pd-x-25">
+                    <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Add a Game Location</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body pd-25">
+                    <div class="row">
+                        <div class="form-group pd-x-5">
+                            <label for="location_add">Location:</label>
+                            <input name="location_add" id="location_add" class="form-control wd-100p" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pd-x-20" onclick="submitLocPost()">Add Game Location</button>
+                    <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div><!-- modal-dialog -->
+    </div>
 @endsection
