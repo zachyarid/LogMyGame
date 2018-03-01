@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\GameTypeController;
+namespace App\Http\Requests\GameController;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 
-class GameTypeCreateRequest extends FormRequest
+class GameEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class GameTypeCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return DB::table('games')->where(['id' => $this->id, 'user_id' => \Auth::id()])->get();
     }
 
     /**
@@ -24,12 +25,7 @@ class GameTypeCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'location' => 'required|string',
-            'assignor' => 'required|string',
-            'hotel' => 'exists',
-            'travel' => 'exists',
-            'grade_premium' => 'exists',
+            //
         ];
     }
 }

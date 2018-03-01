@@ -8,6 +8,8 @@
 <script src="{{ url('/lib/select2/js/select2.min.js')}}"></script>
 <script src="{{ url('/lib/spectrum/spectrum.js')}}"></script>
 <script src="{{ url('/lib/summernote/summernote-bs4.min.js')}}"></script>
+<script src="{{ url('/lib/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ url('/lib/datatables-responsive/dataTables.responsive.js') }}"></script>
 
 
 <script src="{{ url('/lib/d3/d3.js')}}"></script>

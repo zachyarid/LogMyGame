@@ -23,6 +23,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('mileage', 'MileageController');
 
     // Add GameLocation and GameType routes
-    Route::post('/gamelocation/add', 'GameLocationsController@store')->name('add-gameloc');
-    Route::post('/gametype/add', 'GameTypesController@store')->name('add-gametype');
+    Route::post('/gamelocation/add', 'GameLocationsController@store');
+    Route::post('/gametype/add', 'GameTypesController@store');
 });

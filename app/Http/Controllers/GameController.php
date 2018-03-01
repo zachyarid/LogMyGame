@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Game;
 use Illuminate\Http\Request;
-use App\Http\Requests\GameController\GameCreateRequest as MyRequest;
+use App\Http\Requests\GameController\GameCreateRequest as CreateRequest;
+use App\Http\Requests\GameController\GameEditRequest as EditRequest;
 
 class GameController extends Controller
 {
@@ -21,8 +22,11 @@ class GameController extends Controller
      */
     public function index()
     {
+        $data = [
+            'games' => DB::table('games')->where(['user_id' => \Auth::id()])->get(),
+        ];
 
-        return view('pages.game.view-game');
+        return view('pages.game.view-game', $data);
     }
 
     /**
@@ -48,7 +52,7 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MyRequest $request)
+    public function store(CreateRequest $request)
     {
         Game::create([
             'user_id' => \Auth::id(),
@@ -84,7 +88,16 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        //
+        $this->authorize('view', $game);
+
+        $data = [
+            'game' => $game,
+            'gametypes' => DB::table('game_types')->get(),
+            'gamelocs' => DB::table('game_locations')->get(),
+            'ages' => DB::table('ages')->get(),
+        ];
+
+        return view('pages.game.show-game', $data);
     }
 
     /**
@@ -95,7 +108,16 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        //
+        $this->authorize('view', $game);
+
+        $data = [
+            'game' => $game,
+            'gametypes' => DB::table('game_types')->get(),
+            'gamelocs' => DB::table('game_locations')->get(),
+            'ages' => DB::table('ages')->get(),
+        ];
+
+        return view('pages.game.edit-game', $data);
     }
 
     /**
@@ -105,9 +127,11 @@ class GameController extends Controller
      * @param  \App\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(EditRequest $request, Game $game)
     {
-        //
+        $this->authorize('update', $game);
+
+
     }
 
     /**
@@ -118,6 +142,6 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        //
+        $this->authorize('delete', $game);
     }
 }

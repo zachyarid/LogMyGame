@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             AgesTableSeeder::class,
             GameLocationTableSeeder::class,
             GameTypesTableSeeder::class,
+            GamesTableSeeder::class,
         ]);
     }
 }

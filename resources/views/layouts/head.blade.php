@@ -5,7 +5,6 @@
 <!-- Meta -->
 <meta name="description" content="A simple, convenient way to log your games">
 <meta name="author" content="Zach Yarid">
-<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>{{ env('APP_NAME') }}</title>
 
@@ -14,7 +13,9 @@
 <link href="{{ url('/lib/Ionicons/css/ionicons.css') }}" rel="stylesheet" >
 <link href="{{ url('/lib/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
 <link href="{{ url('/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
-
+<link href="{{ url('/lib/highlightjs/github.css') }}" rel="stylesheet">
+<link href="{{ url('/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
+<link href="{{ url('/lib/select2/css/select2.min.css') }}" rel="stylesheet">
 
 <!-- Katniss CSS -->
 <link rel="stylesheet" href="{{ url('/css/katniss.css')}}">

@@ -11,7 +11,7 @@
    // displaying time and date in left sidebar
    var interval = setInterval(function() {
      var momentNow = moment();
-     $('#ktDate').html(momentNow.format('MMMM DD, YYYY hh:mm:ss') + ' '
+     $('#ktDate').html(momentNow.format('MMMM DD, YYYY HH:mm:ss') + ' '
        + momentNow.format('dddd')
        .substring(0,3).toUpperCase());
    }, 100);

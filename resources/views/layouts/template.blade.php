@@ -15,6 +15,11 @@
             <!-- your content goes here -->
             @yield ('content')
         </div><!-- kt-pagebody -->
+
+        <!--<div class="kt-footer">
+            <span>Copyright &copy; 2018. All Rights Reserved.</span>
+            <span>Created by: Zach Yarid & Company</span>
+        </div><!-- kt-footer -->
     </div><!-- kt-mainpanel -->
 
     @include('layouts.endbody')
