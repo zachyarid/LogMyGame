@@ -6,6 +6,6 @@
     @endif
 
     <form method="POST">
-        <label>Look a home page!</label>
+        <label>Look a soon to be dashboard!</label>
     </form>
 @endsection
