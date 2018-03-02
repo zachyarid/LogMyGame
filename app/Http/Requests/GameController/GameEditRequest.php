@@ -25,7 +25,23 @@ class GameEditRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'game_date' => 'required|date|before_or_equal:' . date('Y-m-d', time()),
+            'game_time' => 'required',
+            'location' => 'required|exists:game_locations,id|numeric',
+            'age' => 'required|exists:ages,id|numeric',
+            'home_team' => 'required',
+            'home_score' => 'required|min:0|numeric',
+            'away_team' => 'required',
+            'away_score' => 'required|min:0|numeric',
+            'center_name' => 'required|max:255',
+            'ar1_name' => 'max:255|nullable',
+            'ar2_name' => 'max:255|nullable',
+            'th_name' => 'max:255|nullable',
+            'comments' => 'string|nullable',
+            'game_fee' => 'required|numeric',
+            'miles_run' => 'min:0|max:50|numeric|nullable',
+            'game_type' => 'required|numeric',
+            'platform' => 'required',
         ];
     }
 }

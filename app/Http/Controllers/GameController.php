@@ -76,7 +76,7 @@ class GameController extends Controller
             'ussf_grade' => \Auth::user()->ussf_grade,
         ]);
 
-        return redirect('/game')->with('message', 'Game added!');
+        return redirect('/game')->with('success_message', 'Game added!');
 
     }
 
@@ -131,7 +131,28 @@ class GameController extends Controller
     {
         $this->authorize('update', $game);
 
+        $newGame = Game::find($game->id);
 
+        $newGame->date = $request->game_date;
+        $newGame->time = $request->game_time;
+        $newGame->location_id = $request->location;
+        $newGame->age_id = $request->age;
+        $newGame->home_team = $request->home_team;
+        $newGame->home_team_score = $request->home_score;
+        $newGame->away_team = $request->away_team;
+        $newGame->away_team_score = $request->away_score;
+        $newGame->center_name = $request->center_name;
+        $newGame->ar1_name = $request->ar1_name;
+        $newGame->ar2_name = $request->ar2_name;
+        $newGame->th_name = $request->th_name;
+        $newGame->comments = $request->comments;
+        $newGame->game_fee = $request->game_fee;
+        $newGame->miles_run = $request->miles_run;
+        $newGame->type = $request->game_type;
+
+        $newGame->save();
+
+        return redirect('/game')->with('success_message', 'Game updated!');
     }
 
     /**
@@ -143,5 +164,7 @@ class GameController extends Controller
     public function destroy(Game $game)
     {
         $this->authorize('delete', $game);
+
+        // Not sure if I want to allow a game deletion
     }
 }

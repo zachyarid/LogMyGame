@@ -981,7 +981,6 @@ MediumEditor.extensions = {};
         /**
          * Set target to blank on the given el element
          *
-         * TODO: not sure if this should be here
          *
          * When creating a link (using core -> createLink) the selection returned by Firefox will be the parent of the created link
          * instead of the created link itself (as it is for Chrome for example), so we retrieve all "a" children to grab the good one by
@@ -1390,7 +1389,6 @@ MediumEditor.extensions = {};
             return element;
         },
 
-        // TODO: remove getFirstTextNode AND _getFirstTextNode when jumping in 6.0.0 (no code references)
         getFirstTextNode: function (element) {
             Util.warn('getFirstTextNode is deprecated and will be removed in version 6.0.0');
             return Util._getFirstTextNode(element);
@@ -1558,8 +1556,6 @@ MediumEditor.extensions = {};
         if (protoProps) {
             MediumEditor.util.extend(child.prototype, protoProps);
         }
-
-        // todo: $super?
 
         return child;
     };
@@ -2581,7 +2577,6 @@ MediumEditor.extensions = {};
             var index = this.indexOfCustomListener(event, listener);
             if (index !== -1) {
                 this.customEvents[event].splice(index, 1);
-                // TODO: If array is empty, should detach internal listeners via destroyListener()
             }
         },
 
@@ -2595,7 +2590,6 @@ MediumEditor.extensions = {};
 
         detachAllCustomEvents: function () {
             this.customEvents = {};
-            // TODO: Should detach internal listeners here via destroyListener()
         },
 
         triggerCustomEvent: function (name, data, editable) {
@@ -2818,7 +2812,6 @@ MediumEditor.extensions = {};
                     // Detecting drop on the contenteditables
                     this.attachToEachElement('drop', this.handleDrop);
                     break;
-                // TODO: We need to have a custom 'paste' event separate from 'editablePaste'
                 // Need to think about the way to introduce this without breaking folks
                 case 'editablePaste':
                     // Detecting paste on the contenteditables
@@ -3767,7 +3760,6 @@ MediumEditor.extensions = {};
             // override the various form buildup/serialize functions.
 
             if (this.targetCheckbox) {
-                // fixme: ideally, this targetCheckboxText would be a formLabel too,
                 // figure out how to deprecate? also consider `fa-` icon default implcations.
                 template.push(
                     '<div class="medium-editor-toolbar-form-row">',
@@ -3780,7 +3772,6 @@ MediumEditor.extensions = {};
             }
 
             if (this.customClassOption) {
-                // fixme: expose this `Button` text as a formLabel property, too
                 // and provide similar access to a `fa-` icon default.
                 template.push(
                     '<div class="medium-editor-toolbar-form-row">',
@@ -3812,7 +3803,6 @@ MediumEditor.extensions = {};
                 buttonCheckbox = this.getAnchorButtonCheckbox();
 
             opts = opts || { value: '' };
-            // TODO: This is for backwards compatability
             // We don't need to support the 'string' argument in 6.0.0
             if (typeof opts === 'string') {
                 opts = {
@@ -4075,7 +4065,6 @@ MediumEditor.extensions = {};
             return this.getPreviewElement();
         },
 
-        // TODO: Remove this function in 6.0.0
         getPreviewElement: function () {
             return this.anchorPreview;
         },
@@ -4322,7 +4311,6 @@ MediumEditor.extensions = {};
             this.hovering = this.instanceHandlePreviewMouseover = this.instanceHandlePreviewMouseout = null;
         },
 
-        // TODO: break up method and extract out handlers
         attachPreviewHandlers: function () {
             this.lastOver = (new Date()).getTime();
             this.hovering = true;
@@ -4756,7 +4744,7 @@ MediumEditor.extensions = {};
                 if (data.meta === isMeta &&
                     data.shift === isShift &&
                     (data.alt === isAlt ||
-                     undefined === data.alt)) { // TODO deprecated: remove check for undefined === data.alt when jumping to 6.0.0
+                     undefined === data.alt)) {
                     event.preventDefault();
                     event.stopPropagation();
 
@@ -5600,19 +5588,16 @@ MediumEditor.extensions = {};
             MediumEditor.util.insertHTMLCommand(this.document, fragmentBody.innerHTML.replace(/&nbsp;/g, ' '));
         },
 
-        // TODO (6.0): Make this an internal helper instead of member of paste handler
         isCommonBlock: function (el) {
             return (el && (el.nodeName.toLowerCase() === 'p' || el.nodeName.toLowerCase() === 'div'));
         },
 
-        // TODO (6.0): Make this an internal helper instead of member of paste handler
         filterCommonBlocks: function (el) {
             if (/^\s*$/.test(el.textContent) && el.parentNode) {
                 el.parentNode.removeChild(el);
             }
         },
 
-        // TODO (6.0): Make this an internal helper instead of member of paste handler
         filterLineBreak: function (el) {
             if (this.isCommonBlock(el.previousElementSibling)) {
                 // remove stray br's following common block elements
@@ -5626,7 +5611,6 @@ MediumEditor.extensions = {};
             }
         },
 
-        // TODO (6.0): Make this an internal helper instead of member of paste handler
         // remove an element, including its parent, if it is the only element within its parent
         removeWithParent: function (el) {
             if (el && el.parentNode) {
@@ -5638,7 +5622,6 @@ MediumEditor.extensions = {};
             }
         },
 
-        // TODO (6.0): Make this an internal helper instead of member of paste handler
         cleanupSpans: function (containerEl) {
             var i,
                 el,
@@ -6996,7 +6979,6 @@ MediumEditor.extensions = {};
             element.setAttribute('role', 'textbox');
             element.setAttribute('aria-multiline', true);
             element.setAttribute('data-medium-editor-editor-index', editorId);
-            // TODO: Merge data-medium-editor-element and medium-editor-index attributes for 6.0.0
             // medium-editor-index is not named correctly anymore and can be re-purposed to signify
             // whether the element has been initialized or not
             element.setAttribute('medium-editor-index', elementId);
@@ -7132,7 +7114,6 @@ MediumEditor.extensions = {};
         }
 
         if (action === 'fontSize') {
-            // TODO: Deprecate support for opts.size in 6.0.0
             if (opts.size) {
                 MediumEditor.util.deprecated('.size option for fontSize command', '.value', '6.0.0');
             }
@@ -7141,7 +7122,6 @@ MediumEditor.extensions = {};
         }
 
         if (action === 'fontName') {
-            // TODO: Deprecate support for opts.name in 6.0.0
             if (opts.name) {
                 MediumEditor.util.deprecated('.name option for fontName command', '.value', '6.0.0');
             }
@@ -7593,7 +7573,6 @@ MediumEditor.extensions = {};
 
             try {
                 this.events.disableCustomEvent('editableInput');
-                // TODO: Deprecate support for opts.url in 6.0.0
                 if (opts.url) {
                     MediumEditor.util.deprecated('.url option for createLink', '.value', '6.0.0');
                 }

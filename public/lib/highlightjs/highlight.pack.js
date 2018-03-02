@@ -1539,7 +1539,6 @@ function(hljs) {
     // Foo : Bar := Baz;
     // where only Bar will be highlighted
     var VAR_DECLS = {
-        // TODO: These spaces are not required by the Ada syntax
         // however, I have yet to see handwritten Ada code where
         // someone does not put spaces around :
         begin: '\\s+:\\s+', end: '\\s*(:=|;|\\)|=>|$)',
@@ -2416,7 +2415,7 @@ hljs.registerLanguage('asciidoc', function(hljs) {
           {begin: "`.+?'"}
         ]
       },
-      // inline code snippets (TODO should get same treatment as strong and emphasis)
+      // inline code snippets
       {
         className: 'code',
         begin: '(`.+?`|\\+.+?\\+)',
@@ -5533,7 +5532,7 @@ hljs.registerLanguage('elm', function(hljs) {
 
   var CONSTRUCTOR = {
     className: 'type',
-    begin: '\\b[A-Z][\\w\']*', // TODO: other constructors (built-in, infix).
+    begin: '\\b[A-Z][\\w\']*',
     relevance: 0
   };
 
@@ -5588,7 +5587,6 @@ hljs.registerLanguage('elm', function(hljs) {
 
       // Literals and names.
 
-      // TODO: characters.
       hljs.QUOTE_STRING_MODE,
       hljs.C_NUMBER_MODE,
       CONSTRUCTOR,
@@ -7042,7 +7040,7 @@ hljs.registerLanguage('groovy', function(hljs) {
     }
 });
 
-hljs.registerLanguage('haml', // TODO support filter tags like :javascript, support inline HTML
+hljs.registerLanguage('haml',
 function(hljs) {
   return {
     case_insensitive: true,
@@ -7052,7 +7050,6 @@ function(hljs) {
         begin: '^!!!( (5|1\\.1|Strict|Frameset|Basic|Mobile|RDFa|XML\\b.*))?$',
         relevance: 10
       },
-      // FIXME these comments should be allowed to span indented lines
       hljs.COMMENT(
         '^\\s*(!=#|=#|-#|/).*$',
         false,
@@ -7209,7 +7206,7 @@ hljs.registerLanguage('haskell', function(hljs) {
 
   var CONSTRUCTOR = {
     className: 'type',
-    begin: '\\b[A-Z][\\w\']*', // TODO: other constructors (build-in, infix).
+    begin: '\\b[A-Z][\\w\']*',
     relevance: 0
   };
 
@@ -7292,7 +7289,6 @@ hljs.registerLanguage('haskell', function(hljs) {
 
       // Literals and names.
 
-      // TODO: characters.
       hljs.QUOTE_STRING_MODE,
       hljs.C_NUMBER_MODE,
       CONSTRUCTOR,
@@ -8352,7 +8348,6 @@ hljs.registerLanguage('julia', function(hljs) {
     begin: '\\$' + VARIABLE_NAME_RE
   };
 
-  // TODO: neatly escape normal code in string literal
   var STRING = {
     className: 'string',
     contains: [hljs.BACKSLASH_ESCAPE, INTERPOLATION, INTERPOLATED_VARIABLE],
@@ -8853,7 +8848,7 @@ hljs.registerLanguage('less', function(hljs) {
     hljs.C_BLOCK_COMMENT_MODE,
     STRING_MODE("'"),
     STRING_MODE('"'),
-    hljs.CSS_NUMBER_MODE, // fixme: it does not include dot for numbers like .5em :(
+    hljs.CSS_NUMBER_MODE,
     {
       begin: '(url|data-uri)\\(',
       starts: {className: 'string', end: '[\\)\\n]', excludeEnd: true}
@@ -12955,10 +12950,6 @@ function(hljs) {
 
   // print parameters
   // Several parameters are available for print command:
-  // ToDo: var PARAMETERS_PRINT = 'append as-value brief detail count-only file follow follow-only from interval terse value-list without-paging where info';
-  // ToDo: var OPERATORS = '&& and ! not || or in ~ ^ & << >> + - * /';
-  // ToDo: var TYPES = 'num number bool boolean str string ip ip6-prefix id time array';
-  // ToDo: The following tokens serve as delimiters in the grammar: ()  []  {}  :   ;   $   / 
 
   var VAR_PREFIX = 'global local set for foreach';
 

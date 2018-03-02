@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GameType;
 use Illuminate\Http\Request;
-use App\Http\Requests\GameTypeController\GameTypeCreateRequest as MyRequest;
+use App\Http\Requests\GameTypeController\GameTypeCreateRequest as CreateRequest;
 
 class GameTypesController extends Controller
 {
@@ -13,7 +13,7 @@ class GameTypesController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(MyRequest $request)
+    public function store(CreateRequest $request)
     {
         GameType::create([
             'name' => $request->name,
@@ -24,6 +24,6 @@ class GameTypesController extends Controller
             'grade_premium' => $request->grade_premium,
         ]);
 
-        return redirect('/game/add');
+        return redirect('/game/add')->with('success_message', 'Game Type added!');
     }
 }

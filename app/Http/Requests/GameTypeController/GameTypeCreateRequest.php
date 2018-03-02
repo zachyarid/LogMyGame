@@ -27,9 +27,9 @@ class GameTypeCreateRequest extends FormRequest
             'name' => 'required|string',
             'location' => 'required|string',
             'assignor' => 'required|string',
-            'hotel' => 'exists',
-            'travel' => 'exists',
-            'grade_premium' => 'exists',
+            'hotel' => 'present|in:on,off',
+            'travel' => 'present|in:on,off',
+            'grade_premium' => 'present|in:on,off',
         ];
     }
 }

@@ -19,6 +19,6 @@ class GameLocationsController extends Controller
             'location' => $request->location
         ]);
 
-        return redirect('/game/add');
+        return redirect('/game/add')->with('success_message', 'Game Location added!');
     }
 }

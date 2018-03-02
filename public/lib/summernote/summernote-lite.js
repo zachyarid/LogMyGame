@@ -3251,7 +3251,6 @@
         var includeAncestor = options && options.includeAncestor;
         var fullyContains = options && options.fullyContains;
 
-        // TODO compare points and sort
         var startPoint = this.getStartPoint();
         var endPoint = this.getEndPoint();
 
@@ -8360,7 +8359,6 @@
         'statusbar': Statusbar,
         'fullscreen': Fullscreen,
         'handle': Handle,
-        // FIXME: HintPopover must be front of autolink
         //  - Script error about range when Enter key is pressed on hint popover
         'hintPopover': HintPopover,
         'autoLink': AutoLink,

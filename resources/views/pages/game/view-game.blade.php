@@ -1,13 +1,17 @@
 @extends('layouts.template')
 
 @section('content')
-    @if ($message = session('message'))
-        @include('layouts.alert')
+    @if ($message = session('success_message'))
+        @include('layouts.alert-success')
+    @elseif ($message = session('fail_message'))
+        @include('layouts.alert-danger')
     @endif
 
     <div class="card pd-20 pd-sm-40">
-
         <div class="table-responsive">
+            <div class="col-md-1">
+                <button class="btn btn-default" onclick="window.location = '{{ route('game.create') }}'">Log Game</button>
+            </div>
             <table id="game-log" class="table table-striped table-responsive">
                 <thead>
                     <tr>

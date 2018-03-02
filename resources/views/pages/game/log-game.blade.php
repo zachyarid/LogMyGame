@@ -1,8 +1,10 @@
 @extends('layouts.template')
 
 @section('content')
-    @if ($message = session('message'))
-        @include('layouts.alert')
+    @if ($message = session('success_message'))
+        @include('layouts.alert-success')
+    @elseif ($message = session('fail_message'))
+        @include('layouts.alert-danger')
     @endif
 
     <form method="POST" action="{{ route('game.store') }}">
@@ -321,8 +323,8 @@
 
                             @if ($errors->has('comments'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('comments') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('comments') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -371,8 +373,10 @@
                 },
                 success: function (data) {
                     console.log(data);
-
                     location.reload();
+                },
+                error: function(data) {
+                    console.log(data);
                 }
             });
         }
@@ -390,8 +394,8 @@
                 type: "POST",
                 url: '/gametype/add',
                 data: {
-                    location: gameloc,
                     name: name,
+                    location: gameloc,
                     assignor: assignor,
                     hotel: hotel,
                     travel: travel,
@@ -400,8 +404,10 @@
                 },
                 success: function (data) {
                     console.log(data);
-
                     location.reload();
+                },
+                error: function(data) {
+                    console.log(data);
                 }
             });
         }
@@ -431,7 +437,7 @@
                         <label for="assignor_add">Assignor:</label>
                         <input name="assignor_add" id="assignor_add" class="form-control wd-100p" />
                     </div>
-
+                    <!-- TODO: Figure out why these are always ON -->
                     <label class="ckbox">
                         <input type="checkbox" name="hotel" id="hotel">
                         <span>Hotel</span>
