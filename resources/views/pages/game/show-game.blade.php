@@ -12,7 +12,7 @@
         <div class="row row-sm mg-t-20">
             <div class="col-xl-6">
                 <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                    <h6 class="card-body-title">Enter Game Details</h6>
+                    <h6 class="card-body-title">Game Details</h6>
                     <p class="mg-b-20 mg-sm-b-30"></p>
 
                     <div class="row">
@@ -131,7 +131,7 @@
 
             <div class="col-xl-6 mg-t-25 mg-xl-t-0">
                 <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                    <h6 class="card-body-title">Enter Team Details</h6>
+                    <h6 class="card-body-title">Team Details</h6>
                     <p class="mg-b-20 mg-sm-b-30"></p>
 
                     <div class="row mg-t-20">
@@ -205,7 +205,7 @@
         <div class="row row-sm mg-t-20">
             <div class="col-xl-6">
                 <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                    <h6 class="card-body-title">Enter Referee Details</h6>
+                    <h6 class="card-body-title">Referee Details</h6>
                     <p class="mg-b-20 mg-sm-b-30"></p>
 
                     <div class="row mg-t-20">
@@ -289,7 +289,7 @@
 
             <div class="col-xl-6 mg-t-25 mg-xl-t-0">
                 <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                    <h6 class="card-body-title">Enter Miscellaneous Details</h6>
+                    <h6 class="card-body-title">Miscellaneous Details</h6>
                     <p class="mg-b-20 mg-sm-b-30"></p>
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="miles_run">Distance Run: </label>
@@ -311,12 +311,18 @@
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <textarea id="summernote-editor" name="comments">{{ $game->comments }}</textarea>
 
-
                             @if ($errors->has('comments'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('comments') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('comments') }}</strong>
+                                </span>
                             @endif
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label" for="comments">Payment Status: </label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input name="paid_status" id="paid_status" class="form-control {{ $game->payment_id == null ? 'alert-danger' : 'alert-success'}}"
+                                   value="{{ $game->payment_id == null ? 'NOT PAID' : 'PAID' }}"/>
                         </div>
                     </div>
                 </div><!-- card -->

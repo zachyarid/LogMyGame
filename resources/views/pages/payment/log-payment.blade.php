@@ -3,7 +3,7 @@
 @section('content')
     <form method="POST" action="{{ route('payment.store') }}">
         @csrf
-
+        {{ print_r($gameswithoutpay) }}
         <div class="card pd-20 pd-sm-40">
             <h6 class="card-body-title">Enter Payment Details</h6>
             <p class="mg-b-20 mg-sm-b-30"></p>

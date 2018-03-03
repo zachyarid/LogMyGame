@@ -16,6 +16,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('payment_id')->unsigned()->nullable(true);
             //$table->foreign('user_id')->references('id')->on('users');
             $table->date('date');
             $table->time('time');
@@ -32,7 +33,7 @@ class CreateGamesTable extends Migration
             $table->string('ar2_name')->nullable(true);
             $table->string('th_name')->nullable(true);
             $table->text('comments')->nullable(true);
-            $table->string('ussf_grade')->comment('To be able to have a history outlook on games refereed.');
+            $table->string('ussf_grade')->comment('To be able to have a historic outlook on games refereed.');
             $table->decimal('game_fee', '5', '2');
             $table->decimal('miles_run', '4', '2')->nullable(true);
             $table->integer('type');

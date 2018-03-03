@@ -38,7 +38,7 @@
                             <td>{{ $g->th_name }}</td>
                             <td>
                                 <button class="btn btn-success" onclick="window.location = '{{ route('game.edit', ['game' => $g->id]) }}'">Edit</button>
-                                <button class="btn btn-success" onclick="window.location = '{{ route('game.show', ['game' => $g->id]) }}'">View</button>
+                                <button class="btn btn-default" onclick="window.location = '{{ route('game.show', ['game' => $g->id]) }}'">View</button>
                             </td>
                         </tr>
                     @endforeach

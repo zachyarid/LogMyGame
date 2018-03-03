@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             GameLocationTableSeeder::class,
             GameTypesTableSeeder::class,
             GamesTableSeeder::class,
+            PaymentsTableSeeder::class,
         ]);
     }
 }

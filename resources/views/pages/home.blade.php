@@ -9,5 +9,9 @@
 
     <form method="POST">
         <label>Look a soon to be dashboard!</label>
+
+        <!-- TODO: games not paid, how long, etc
+             TODO: most recent games
+         -->
     </form>
 @endsection

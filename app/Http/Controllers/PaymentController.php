@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Payment;
 use Illuminate\Http\Request;
-use App\Http\Requests\PaymentController\PaymentCreateRequest as MyRequest;
+use App\Http\Requests\PaymentController\PaymentCreateRequest as CreateRequest;
 
 class PaymentController extends Controller
 {
@@ -20,7 +21,11 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('pages.payment.view-payment');
+        $data = [
+            'payments' => DB::table('payments')->where(['user_id' => \Auth::id()])->get(),
+        ];
+
+        return view('pages.payment.view-payment', $data);
     }
 
     /**
@@ -30,7 +35,11 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        return view('pages.payment.log-payment');
+        $data = [
+            'gameswithoutpay' => DB::table('games')->where('user_id', \Auth::id())->whereNull('payment_id')->get(),
+        ];
+
+        return view('pages.payment.log-payment', $data);
     }
 
     /**
@@ -39,7 +48,7 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MyRequest $request)
+    public function store(CreateRequest $request)
     {
         Payment::create([
             'user_id' => \Auth::id(),
@@ -60,7 +69,7 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
-        //
+        $this->authorize('view', $payment);
     }
 
     /**
@@ -71,7 +80,7 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        //
+        $this->authorize('view', $payment);
     }
 
     /**
@@ -83,7 +92,7 @@ class PaymentController extends Controller
      */
     public function update(Request $request, Payment $payment)
     {
-        //
+        $this->authorize('update', $payment);
     }
 
     /**
@@ -94,6 +103,6 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        //
+        $this->authorize('delete', $payment);
     }
 }
