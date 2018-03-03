@@ -29,8 +29,8 @@
                                 <input type="hidden" name="game_date" id="game_datef" value="{{ old('game_date') }}" />
                                 @if ($errors->has('game_date'))
                                     <span class="invalid-feedback">
-                                <strong>{{ $errors->first('game_date') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('game_date') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -61,11 +61,9 @@
                                 <option selected disabled value="">Select a Game Type</option>
                                 @if (count($gametypes) > 0)
                                     @foreach ($gametypes as $type)
-                                        @if ($type->id == old('game_type'))
-                                            <option selected value="{{ $type->id }}">{{ $type->name }}</option>
-                                        @else
-                                            <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                        @endif
+                                        <option value="{{ $type->id }}" {{ $type->id == old('game_type') ? 'selected' : '' }}>
+                                            {{ $type->name }}
+                                        </option>
                                     @endforeach
                                 @endif
                             </select>
@@ -90,11 +88,9 @@
                                 <option selected disabled value="">Select a Location</option>
                                 @if (count($gamelocs) > 0)
                                     @foreach ($gamelocs as $loc)
-                                        @if ($loc->id == old('location'))
-                                            <option selected value="{{ $loc->id }}">{{ $loc->location }}</option>
-                                        @else
-                                            <option value="{{ $loc->id }}">{{ $loc->location }}</option>
-                                        @endif
+                                        <option value="{{ $loc->id }}" {{ $loc->id == old('location') ? 'selected' : '' }}>
+                                            {{ $loc->location }}
+                                        </option>
                                     @endforeach
                                 @endif
                             </select>
@@ -119,11 +115,9 @@
                                 <option selected disabled value="">Select an Age</option>
                                 @if (count($ages) > 0)
                                     @foreach ($ages as $a)
-                                        @if ($a->id == old('age'))
-                                            <option selected value="{{ $a->id }}">{{ $a->string }}</option>
-                                        @else
-                                            <option value="{{ $a->id }}">{{ $a->string }}</option>
-                                        @endif
+                                        <option value="{{ $a->id }}" {{ $a->id == old('age') ? 'selected' : '' }}>
+                                            {{ $a->string }}
+                                        </option>
                                     @endforeach
                                 @endif
                             </select>
@@ -153,8 +147,8 @@
 
                             @if ($errors->has('home_team'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('home_team') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('home_team') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -319,7 +313,6 @@
                         <label class="col-sm-4 form-control-label" for="comments">Comments: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <textarea id="summernote-editor" name="comments">{{ old('comments') }}</textarea>
-
 
                             @if ($errors->has('comments'))
                                 <span class="invalid-feedback">

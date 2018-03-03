@@ -16,6 +16,8 @@
 <link href="{{ url('/lib/highlightjs/github.css') }}" rel="stylesheet">
 <link href="{{ url('/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
 <link href="{{ url('/lib/select2/css/select2.min.css') }}" rel="stylesheet">
+<link href="{{ url('/lib/medium-editor/medium-editor.css') }}" rel="stylesheet">
+<link href="{{ url('/lib/medium-editor/default.css') }}" rel="stylesheet">
 
 <!-- Katniss CSS -->
 <link rel="stylesheet" href="{{ url('/css/katniss.css')}}">

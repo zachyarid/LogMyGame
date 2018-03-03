@@ -1,0 +1,45 @@
+[Tue Feb 27 14:37:11.953758 2018] [php7:error] [pid 27436] [client 192.168.1.1:61225] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32768 bytes) in /home/zach/public_html/gameloggerv2/storage/framework/views/0220b793b446e0d19c5f53b33796bd7c029a48f4.php on line 1, referer: https://gl2.zachyarid.com/login
+[Tue Feb 27 14:37:11.954985 2018] [php7:error] [pid 27436] [client 192.168.1.1:61225] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 65536 bytes) in /home/zach/public_html/gameloggerv2/vendor/composer/ClassLoader.php on line 444, referer: https://gl2.zachyarid.com/login
+[Tue Feb 27 14:37:11.955593 2018] [php7:error] [pid 27436] [client 192.168.1.1:61225] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 102400 bytes) in Unknown on line 0, referer: https://gl2.zachyarid.com/login
+[Tue Feb 27 14:40:48.772643 2018] [php7:error] [pid 27436] [client 192.168.1.1:61302] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32768 bytes) in /home/zach/public_html/gameloggerv2/storage/framework/views/0220b793b446e0d19c5f53b33796bd7c029a48f4.php on line 1
+[Tue Feb 27 14:40:48.773687 2018] [php7:error] [pid 27436] [client 192.168.1.1:61302] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 65536 bytes) in /home/zach/public_html/gameloggerv2/vendor/composer/ClassLoader.php on line 444
+[Tue Feb 27 14:40:48.774002 2018] [php7:error] [pid 27436] [client 192.168.1.1:61302] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 69632 bytes) in Unknown on line 0
+[Tue Feb 27 14:41:20.111188 2018] [php7:error] [pid 10002] [client 192.168.1.1:61312] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 16384 bytes) in /home/zach/public_html/gameloggerv2/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php on line 35
+[Tue Feb 27 14:41:20.112203 2018] [php7:error] [pid 10002] [client 192.168.1.1:61312] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 65536 bytes) in /home/zach/public_html/gameloggerv2/vendor/composer/ClassLoader.php on line 444
+[Tue Feb 27 14:41:20.112832 2018] [php7:error] [pid 10002] [client 192.168.1.1:61312] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 135168 bytes) in Unknown on line 0
+[Tue Feb 27 14:44:56.395996 2018] [php7:error] [pid 10002] [client 192.168.1.1:61385] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32768 bytes) in /home/zach/public_html/gameloggerv2/storage/framework/views/0220b793b446e0d19c5f53b33796bd7c029a48f4.php on line 1
+[Tue Feb 27 14:44:56.397165 2018] [php7:error] [pid 10002] [client 192.168.1.1:61385] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 65536 bytes) in /home/zach/public_html/gameloggerv2/vendor/composer/ClassLoader.php on line 444
+[Tue Feb 27 14:44:56.397657 2018] [php7:error] [pid 10002] [client 192.168.1.1:61385] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 102400 bytes) in Unknown on line 0
+[Wed Feb 28 13:01:00.001821 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:01:02.486144 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:01:30.071871 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:01:36.499632 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:02:43.557133 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:02:50.028609 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:02:51.064375 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:02:52.397909 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:02:58.840845 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:02:59.788019 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:01.180545 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:07.598503 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:08.650231 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:09.965016 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:16.406114 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:17.470710 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:18.829969 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:25.663059 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:26.618617 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:28.032787 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:34.614864 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:36.008108 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:37.387543 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:43.904072 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:03:44.914084 2018] [ssl:warn] [pid 799] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:07:39.878820 2018] [ssl:warn] [pid 5300] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Wed Feb 28 13:07:39.948261 2018] [ssl:warn] [pid 5300] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Thu Mar 01 22:06:01.909025 2018] [ssl:warn] [pid 6619] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Thu Mar 01 22:06:01.990736 2018] [ssl:warn] [pid 6619] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Thu Mar 01 22:07:14.364056 2018] [ssl:warn] [pid 6906] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Thu Mar 01 22:07:14.435514 2018] [ssl:warn] [pid 6906] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Thu Mar 01 22:28:55.186146 2018] [ssl:warn] [pid 11552] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Thu Mar 01 22:28:55.265639 2018] [ssl:warn] [pid 11552] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name

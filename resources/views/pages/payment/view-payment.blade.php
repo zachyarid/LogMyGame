@@ -11,7 +11,7 @@
                 <tr>
                     <th>Log Date</th>
                     <th>Payer</th>
-                    <th>Check Number (if applicable)</th>
+                    <th>Check/Reference Number</th>
                     <th></th>
                 </tr>
                 </thead>
