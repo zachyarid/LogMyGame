@@ -16,7 +16,9 @@ class CreateMileageTable extends Migration
         Schema::create('mileage', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('game_id')->unsigned();
+            //rel
             $table->integer('user_id')->unsigned();
+            //rel
             $table->integer('odometer_out');
             $table->integer('odometer_in');
             $table->integer('distance');
