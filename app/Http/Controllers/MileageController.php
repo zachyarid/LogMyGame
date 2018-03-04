@@ -20,7 +20,11 @@ class MileageController extends Controller
      */
     public function index()
     {
-        return view('pages.mileage.view-mileage');
+        $data = [
+            'pageTitle' => 'Mileage Log',
+        ];
+
+        return view('pages.mileage.view-mileage', $data);
     }
 
     /**
@@ -30,7 +34,11 @@ class MileageController extends Controller
      */
     public function create()
     {
-        return view('pages.mileage.log-mileage');
+        $data = [
+            'pageTitle' => 'Log Mileage',
+        ];
+
+        return view('pages.mileage.log-mileage', $data);
     }
 
     /**
@@ -60,7 +68,11 @@ class MileageController extends Controller
      */
     public function show(Mileage $mileageController)
     {
-        //
+        $data = [
+            'pageTitle' => 'View Mileage Entry',
+        ];
+
+
     }
 
     /**
@@ -71,7 +83,9 @@ class MileageController extends Controller
      */
     public function edit(Mileage $mileageController)
     {
-        //
+        $data = [
+            'pageTitle' => 'Edit Mileage Entry',
+        ];
     }
 
     /**

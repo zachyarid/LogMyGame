@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Game;
-use Illuminate\Http\Request;
+use App\GameLocation;
+use App\GameType;
 use App\Http\Requests\GameController\GameCreateRequest as CreateRequest;
 use App\Http\Requests\GameController\GameEditRequest as EditRequest;
 
@@ -23,7 +24,8 @@ class GameController extends Controller
     public function index()
     {
         $data = [
-            'games' => DB::table('games')->where(['user_id' => \Auth::id()])->get(),
+            'pageTitle' => 'View Games',
+            'games' => Game::where(['user_id' => \Auth::id()])->get(),
         ];
 
         return view('pages.game.view-game', $data);
@@ -37,11 +39,11 @@ class GameController extends Controller
     public function create()
     {
         $data = [
-            'gametypes' => DB::table('game_types')->get(),
-            'gamelocs' => DB::table('game_locations')->get(),
+            'pageTitle' => 'Log Game',
+            'gametypes' => GameType::all(),
+            'gamelocs' => GameLocation::all(),
             'ages' => DB::table('ages')->get(),
         ];
-
 
         return view('pages.game.log-game', $data);
     }
@@ -91,9 +93,10 @@ class GameController extends Controller
         $this->authorize('view', $game);
 
         $data = [
+            'pageTitle' => 'View Game',
             'game' => $game,
-            'gametypes' => DB::table('game_types')->get(),
-            'gamelocs' => DB::table('game_locations')->get(),
+            'gametypes' => GameType::all(),
+            'gamelocs' => GameLocation::all(),
             'ages' => DB::table('ages')->get(),
         ];
 
@@ -111,9 +114,10 @@ class GameController extends Controller
         $this->authorize('view', $game);
 
         $data = [
+            'pageTitle' => 'Edit Game',
             'game' => $game,
-            'gametypes' => DB::table('game_types')->get(),
-            'gamelocs' => DB::table('game_locations')->get(),
+            'gametypes' => GameType::all(),
+            'gamelocs' => GameLocation::all(),
             'ages' => DB::table('ages')->get(),
         ];
 

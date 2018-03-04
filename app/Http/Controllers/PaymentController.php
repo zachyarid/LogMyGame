@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Payment;
+use App\Game;
 use Illuminate\Http\Request;
 use App\Http\Requests\PaymentController\PaymentCreateRequest as CreateRequest;
 
@@ -22,7 +22,8 @@ class PaymentController extends Controller
     public function index()
     {
         $data = [
-            'payments' => DB::table('payments')->where(['user_id' => \Auth::id()])->get(),
+            'pageTitle' => 'View Payments',
+            'payments' => Payment::where('user_id', '=', \Auth::id())->get(),
         ];
 
         return view('pages.payment.view-payment', $data);
@@ -36,7 +37,8 @@ class PaymentController extends Controller
     public function create()
     {
         $data = [
-            'gameswithoutpay' => DB::table('games')->where('user_id', \Auth::id())->whereNull('payment_id')->get(),
+            'pageTitle' => 'Log Payments',
+            'gameswithoutpay' => Game::where('user_id', \Auth::id())->whereNull('payment_id')->get(),
         ];
 
         return view('pages.payment.log-payment', $data);

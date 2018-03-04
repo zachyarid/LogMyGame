@@ -11,7 +11,7 @@
             <div class="form-layout">
                 <div class="row mg-b-25">
                     <div class="col-lg-6">
-                        <div class="form-group">
+                        <div class="form-group mg-b-20">
                             <label class="form-control-label">Game: <span class="tx-danger">*</span></label>
                             <select name="game_id" id="game_id"
                                     class="form-control select2{{ $errors->has('game_id') ? ' is-invalid' : '' }}">
@@ -37,7 +37,7 @@
                     </div><!-- col-6 -->
 
                     <div class="col-lg-4">
-                        <div class="form-group">
+                        <div class="form-group mg-b-20">
                             <label class="form-control-label">Check/Reference Number: <span class="tx-danger">*</span></label>
                             <input name="check_number" id="check_number" type="number"
                                    class="form-control{{ $errors->has('check_number') ? ' is-invalid' : '' }}"
@@ -52,7 +52,7 @@
                     </div><!-- col-4 -->
 
                     <div class="col-lg-4">
-                        <div class="form-group mg-b-10">
+                        <div class="form-group mg-b-20">
                             <label class="form-control-label">Date Received: <span class="tx-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
