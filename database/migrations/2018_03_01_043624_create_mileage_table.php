@@ -22,6 +22,7 @@ class CreateMileageTable extends Migration
             $table->integer('odometer_out');
             $table->integer('odometer_in');
             $table->integer('distance');
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

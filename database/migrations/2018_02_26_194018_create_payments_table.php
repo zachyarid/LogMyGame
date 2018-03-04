@@ -21,6 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->string('payer');
             $table->integer('check_number');
             $table->date('date_received');
+            $table->text('comments')->nullable(true);
             $table->timestamps();
         });
     }
