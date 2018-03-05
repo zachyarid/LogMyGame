@@ -11,6 +11,7 @@
 <script src="{{ url('/lib/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ url('/lib/datatables-responsive/dataTables.responsive.js') }}"></script>
 <script src="{{ url('/lib/medium-editor/medium-editor.js') }}"></script>
+<script src="{{ url('/lib/easyautocomplete/jquery.easy-autocomplete.min.js') }}"></script>
 
 <script src="{{ url('/lib/d3/d3.js')}}"></script>
 <!--<script src="{{ url('/lib/rickshaw/rickshaw.min.js')}}"></script>-->

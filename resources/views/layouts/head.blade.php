@@ -18,6 +18,7 @@
 <link href="{{ url('/lib/select2/css/select2.min.css') }}" rel="stylesheet">
 <link href="{{ url('/lib/medium-editor/medium-editor.css') }}" rel="stylesheet">
 <link href="{{ url('/lib/medium-editor/default.css') }}" rel="stylesheet">
+<link href="{{ url('/lib/easyautocomplete/easy-autocomplete.css') }}" rel="stylesheet">
 
 <!-- Katniss CSS -->
 <link rel="stylesheet" href="{{ url('/css/katniss.css')}}">

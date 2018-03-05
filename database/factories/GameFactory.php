@@ -5,7 +5,6 @@ use Faker\Generator as Faker;
 $factory->define(App\Game::class, function (Faker $faker) {
     return [
         'user_id' => $faker->numberBetween(1,12),
-        'payment_id' => $faker->numberBetween(1,20),
         'date' => $faker->dateTimeThisMonth,
         'time' => $faker->time('H:i'),
         'location_id' => $faker->numberBetween(1,5),

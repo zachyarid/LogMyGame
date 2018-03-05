@@ -22,7 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('payment', 'PaymentController');
     Route::resource('mileage', 'MileageController');
 
-    // Add GameLocation and GameType routes
-    Route::post('/gamelocation/add', 'GameLocationsController@store');
-    Route::post('/gametype/add', 'GameTypesController@store');
+    // Custom Routes
+    Route::post('/gamelocation/add', 'GameLocationsController@store')->name('add-gameloc');
+    Route::post('/gametype/add', 'GameTypesController@store')->name('add-gametype');
+    Route::get('/json/teams', 'JsonController@showAllTeams')->name('json-teams');
+    Route::get('/json/referees', 'JsonController@showAllReferees')->name('json-referees');
 });

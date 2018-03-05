@@ -22,6 +22,7 @@
         <h1 class="tx-100 tx-xs-140 tx-normal tx-gray-800 mg-b-0">403!</h1>
         <h5 class="tx-xs-24 tx-normal tx-gray-600 mg-b-30 lh-5">You do not have access to this resource.</h5>
         <p class="tx-16 mg-b-30">If you feel that this is an error, please contact the website administrator.</p>
+        <p class="tx-13 mg-b-30">This incident has been logged.</p>
     </div>
 </div><!-- ht-100v -->
 </body>

@@ -4,7 +4,7 @@ namespace App\Http\Requests\PaymentController;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PaymentCreateRequest extends FormRequest
+class PaymentEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class PaymentCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'game_id' => 'required|array|exists:games,id',
+            //'game_id' => 'required|exists:games,id', lock this
             'payer' => 'required|string',
             'check_number' => 'string',
             'date_received' => 'required|date|before_or_equal:' . date('Y-m-d', time()),

@@ -25,7 +25,7 @@
                                 <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
                                 <input name="game_date"
                                        class="form-control fc-datepicker{{ $errors->has('game_date') ? ' is-invalid' : '' }}"
-                                       value="{{ old('game_date') }}">
+                                       value="{{ old('game_date') ? \Carbon\Carbon::createFromFormat('Y-m-d', old('game_date'))->format('m/d/Y') : '' }}">
                                 <input type="hidden" name="game_date" id="game_datef" value="{{ old('game_date') }}" />
                                 @if ($errors->has('game_date'))
                                     <span class="invalid-feedback">
@@ -46,8 +46,8 @@
 
                             @if ($errors->has('game_time'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('game_time') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('game_time') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -70,8 +70,8 @@
 
                             @if ($errors->has('game_type'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('game_type') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('game_type') }}</strong>
+                                </span>
                             @endif
                         </div>
                         <div class="col-sm-2 mg-t-10 mg-sm-t-0 ">
@@ -142,7 +142,7 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="home_team" id="home_team" type="text"
-                                   class="form-control{{ $errors->has('home_team') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-teams{{ $errors->has('home_team') ? ' is-invalid' : '' }}"
                                    value="{{ old('home_team') }}"/>
 
                             @if ($errors->has('home_team'))
@@ -158,13 +158,13 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="home_score" id="home_score" type="number"
-                                   class="form-control{{ $errors->has('home_score') ? ' is-invalid' : '' }}"
+                                   class="form-control {{ $errors->has('home_score') ? ' is-invalid' : '' }}"
                                    value="{{ old('home_score') }}"/>
 
                             @if ($errors->has('home_score'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('home_score') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('home_score') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -174,13 +174,13 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="away_team" id="away_team" type="text"
-                                   class="form-control{{ $errors->has('away_team') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-teams{{ $errors->has('away_team') ? ' is-invalid' : '' }}"
                                    value="{{ old('away_team') }}"/>
 
                             @if ($errors->has('away_team'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('away_team') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('away_team') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -195,8 +195,8 @@
 
                             @if ($errors->has('away_score'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('away_score') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('away_score') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -216,13 +216,13 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="center_name" id="center_name" type="text"
-                                   class="form-control{{ $errors->has('center_name') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-referees{{ $errors->has('center_name') ? ' is-invalid' : '' }}"
                                    value="{{ old('center_name') }}"/>
 
                             @if ($errors->has('center_name'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('center_name') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('center_name') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -231,13 +231,13 @@
                         <label class="col-sm-4 form-control-label" for="ar1_name">Assistant Referee 1: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="ar1_name" id="ar1_name" type="text"
-                                   class="form-control{{ $errors->has('ar1_name') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-referees{{ $errors->has('ar1_name') ? ' is-invalid' : '' }}"
                                    value="{{ old('ar1_name') }}"/>
 
                             @if ($errors->has('ar1_name'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('ar1_name') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('ar1_name') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -246,13 +246,13 @@
                         <label class="col-sm-4 form-control-label" for="ar2_name">Assistant Referee 2: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="ar2_name" id="ar2_name" type="text"
-                                   class="form-control{{ $errors->has('ar2_name') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-referees{{ $errors->has('ar2_name') ? ' is-invalid' : '' }}"
                                    value="{{ old('ar2_name') }}"/>
 
                             @if ($errors->has('ar2_name'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('ar2_name') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('ar2_name') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -261,13 +261,13 @@
                         <label class="col-sm-4 form-control-label" for="th_name">Fourth Official: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="th_name" id="th_name" type="text"
-                                   class="form-control{{ $errors->has('th_name') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-referees{{ $errors->has('th_name') ? ' is-invalid' : '' }}"
                                    value="{{ old('th_name') }}"/>
 
                             @if ($errors->has('th_name'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('th_name') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('th_name') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -282,8 +282,8 @@
 
                             @if ($errors->has('game_fee'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('game_fee') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('game_fee') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -303,8 +303,8 @@
 
                             @if ($errors->has('miles_run'))
                                 <span class="invalid-feedback">
-                            <strong>{{ $errors->first('miles_run') }}</strong>
-                        </span>
+                                    <strong>{{ $errors->first('miles_run') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>
@@ -351,6 +351,27 @@
             });
 
             $(".select2").select2();
+
+            var optionsTeams = {
+                url: '{{ route('json-teams') }}',
+                list: {
+                    match: {
+                        enabled: true
+                    }
+                }
+            };
+
+            var optionsReferees = {
+                url: '{{ route('json-referees') }}',
+                list: {
+                    match: {
+                        enabled: true
+                    }
+                }
+            };
+
+            $(".easy-ac-teams").easyAutocomplete(optionsTeams);
+            $(".easy-ac-referees").easyAutocomplete(optionsReferees);
         });
 
         function submitLocPost()
@@ -359,7 +380,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '/gamelocation/add',
+                url: '{{ route('add-gameloc') }}',
                 data: {
                     location: gameloc,
                     _token: '{{ csrf_token() }}'
@@ -385,7 +406,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '/gametype/add',
+                url: '{{ route('add-gametype') }}',
                 data: {
                     name: name,
                     location: gameloc,

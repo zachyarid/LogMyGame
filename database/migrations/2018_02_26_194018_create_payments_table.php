@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('user_id')->unsigned();
             ///$table->foreign('game_id')->references('id')->on('games');
             $table->string('payer');
-            $table->integer('check_number');
+            $table->integer('check_number')->nullable(true);
             $table->date('date_received');
             $table->text('comments')->nullable(true);
             $table->timestamps();

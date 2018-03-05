@@ -1,6 +1,12 @@
 @extends('layouts.template')
 
 @section('content')
+    @if ($message = session('success_message'))
+        @include('layouts.alert-success')
+    @elseif ($message = session('fail_message'))
+        @include('layouts.alert-danger')
+    @endif
+
     <div class="card pd-20 pd-sm-40">
         <div class="table-responsive">
             <div class="col-md-1">
@@ -10,6 +16,7 @@
                 <thead>
                 <tr>
                     <th>Log Date</th>
+                    <th>Date Received</th>
                     <th>Payer</th>
                     <th>Check/Reference Number</th>
                     <th></th>
@@ -19,6 +26,7 @@
                 @if (count($payments) > 0)
                     @foreach ($payments as $p)
                         <tr>
+                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $p->created_at)->format('M d, Y') }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $p->date_received)->format('M d, Y') }}</td>
                             <td>{{ $p->payer }}</td>
                             <td>{{ $p->check_number }}</td>

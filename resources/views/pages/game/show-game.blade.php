@@ -21,14 +21,9 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
                                 <input name="game_date"
-                                       class="form-control fc-datepicker{{ $errors->has('game_date') ? ' is-invalid' : '' }}"
+                                       class="form-control fc-datepicker"
                                        value="{{ \Carbon\Carbon::createFromFormat('Y-m-d', $game->date)->format('m/d/Y') }}">
                                 <input type="hidden" name="game_date" id="game_datef" value="" />
-                                @if ($errors->has('game_date'))
-                                    <span class="invalid-feedback">
-                                <strong>{{ $errors->first('game_date') }}</strong>
-                            </span>
-                                @endif
                             </div>
                         </div>
                     </div>
@@ -38,14 +33,8 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="game_time" id="game_time" type="time"
-                                   class="form-control{{ $errors->has('game_time') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->time }}"/>
-
-                            @if ($errors->has('game_time'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('game_time') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -54,7 +43,7 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <select name="game_type" id="game_type"
-                                    class="form-control select2{{ $errors->has('game_type') ? ' is-invalid' : '' }}">
+                                    class="form-control select2">
                                 <option selected disabled value="">Select a Game Type</option>
                                 @if (count($gametypes) > 0)
                                     @foreach ($gametypes as $type)
@@ -66,12 +55,6 @@
                                     @endforeach
                                 @endif
                             </select>
-
-                            @if ($errors->has('game_type'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('game_type') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div><!-- row -->
 
@@ -80,7 +63,7 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <select name="location" id="location"
-                                    class="form-control select2{{ $errors->has('location') ? ' is-invalid' : '' }}">
+                                    class="form-control select2">
                                 <option selected disabled value="">Select a Location</option>
                                 @if (count($gamelocs) > 0)
                                     @foreach ($gamelocs as $loc)
@@ -92,12 +75,6 @@
                                     @endforeach
                                 @endif
                             </select>
-
-                            @if ($errors->has('location'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('location') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
 
@@ -106,7 +83,7 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <select name="age" id="age"
-                                    class="form-control select2{{ $errors->has('age') ? ' is-invalid' : '' }}">
+                                    class="form-control select2">
                                 <option selected disabled value="">Select an Age</option>
                                 @if (count($ages) > 0)
                                     @foreach ($ages as $a)
@@ -118,12 +95,6 @@
                                     @endforeach
                                 @endif
                             </select>
-
-                            @if ($errors->has('age'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('age') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -139,14 +110,8 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="home_team" id="home_team" type="text"
-                                   class="form-control{{ $errors->has('home_team') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->home_team }}"/>
-
-                            @if ($errors->has('home_team'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('home_team') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -155,14 +120,8 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="home_score" id="home_score" type="number"
-                                   class="form-control{{ $errors->has('home_score') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->home_team_score }}"/>
-
-                            @if ($errors->has('home_score'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('home_score') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -171,14 +130,8 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="away_team" id="away_team" type="text"
-                                   class="form-control{{ $errors->has('away_team') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->away_team }}"/>
-
-                            @if ($errors->has('away_team'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('away_team') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -187,14 +140,8 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="away_score" id="away_score" type="number"
-                                   class="form-control{{ $errors->has('away_score') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->away_team_score }}"/>
-
-                            @if ($errors->has('away_score'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('away_score') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -213,14 +160,8 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="center_name" id="center_name" type="text"
-                                   class="form-control{{ $errors->has('center_name') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->center_name }}"/>
-
-                            @if ($errors->has('center_name'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('center_name') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -228,14 +169,8 @@
                         <label class="col-sm-4 form-control-label" for="ar1_name">Assistant Referee 1: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="ar1_name" id="ar1_name" type="text"
-                                   class="form-control{{ $errors->has('ar1_name') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->ar1_name }}"/>
-
-                            @if ($errors->has('ar1_name'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('ar1_name') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -243,14 +178,8 @@
                         <label class="col-sm-4 form-control-label" for="ar2_name">Assistant Referee 2: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="ar2_name" id="ar2_name" type="text"
-                                   class="form-control{{ $errors->has('ar2_name') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->ar2_name }}"/>
-
-                            @if ($errors->has('ar2_name'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('ar2_name') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -258,14 +187,8 @@
                         <label class="col-sm-4 form-control-label" for="th_name">Fourth Official: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="th_name" id="th_name" type="text"
-                                   class="form-control{{ $errors->has('th_name') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->th_name }}"/>
-
-                            @if ($errors->has('th_name'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('th_name') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -274,14 +197,8 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="game_fee" id="game_fee" type="number"
-                                   class="form-control{{ $errors->has('game_fee') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->game_fee }}"/>
-
-                            @if ($errors->has('game_fee'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('game_fee') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -295,14 +212,8 @@
                         <label class="col-sm-4 form-control-label" for="miles_run">Distance Run: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="miles_run" id="miles_run" type="number"
-                                   class="form-control{{ $errors->has('miles_run') ? ' is-invalid' : '' }}"
+                                   class="form-control"
                                    value="{{ $game->miles_run }}"/>
-
-                            @if ($errors->has('miles_run'))
-                                <span class="invalid-feedback">
-                            <strong>{{ $errors->first('miles_run') }}</strong>
-                        </span>
-                            @endif
                         </div>
                     </div>
 
@@ -310,19 +221,13 @@
                         <label class="col-sm-4 form-control-label" for="comments">Comments: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <textarea id="summernote-editor" name="comments">{{ $game->comments }}</textarea>
-
-                            @if ($errors->has('comments'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('comments') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="comments">Payment Status: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="paid_status" id="paid_status" class="form-control {{ $game->payment_id == null ? 'alert-danger' : 'alert-success'}}"
-                                   value="{{ $game->payment_id == null ? 'NOT PAID' : 'PAID' }}"/>
+                            <input name="paid_status" id="paid_status" class="form-control {{ $game->hasPayments() ? 'alert-success' : 'alert-danger'}}"
+                                   value="{{ $game->hasPayments() ? 'PAID' : 'NOT PAID' }}"/>
                         </div>
                     </div>
                 </div><!-- card -->
@@ -334,14 +239,6 @@
 @section('script-source')
     <script>
         $(document).ready(function () {
-            $('.fc-datepicker').datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                numberOfMonths: 1,
-                altFormat: 'yy-mm-dd',
-                altField: '#game_datef'
-            });
-
             $('#summernote-editor').summernote({
                 height: 150
             }).summernote('disable');

@@ -16,7 +16,6 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('payment_id')->unsigned()->nullable(true);
             //$table->foreign('user_id')->references('id')->on('users');
             $table->date('date');
             $table->time('time');

@@ -6,6 +6,8 @@ use App\Payment;
 use App\Game;
 use Illuminate\Http\Request;
 use App\Http\Requests\PaymentController\PaymentCreateRequest as CreateRequest;
+use App\Http\Requests\PaymentController\PaymentEditRequest as EditRequest;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -38,7 +40,11 @@ class PaymentController extends Controller
     {
         $data = [
             'pageTitle' => 'Log Payments',
-            'gameswithoutpay' => Game::where('user_id', \Auth::id())->whereNull('payment_id')->get(),
+            'gameswithoutpay' => DB::table('games')->whereNotExists(function ($query) {
+                                    $query->select(DB::raw(1))
+                                          ->from('payments')
+                                          ->whereRaw('payments.game_id = games.id and payments.user_id = ' . \Auth::id());
+                                 })->where('user_id', \Auth::id())->get()
         ];
 
         return view('pages.payment.log-payment', $data);
@@ -52,15 +58,19 @@ class PaymentController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        Payment::create([
-            'user_id' => \Auth::id(),
-            'game_id' => $request->game_id,
-            'payer' => $request->payer,
-            'check_number' => $request->check,
-            'date_received' => $request->daterec,
-        ]);
+        foreach ($request->game_id as $id)
+        {
+            Payment::create([
+                'user_id' => \Auth::id(),
+                'game_id' => $id,
+                'payer' => $request->payer,
+                'check_number' => $request->check,
+                'date_received' => $request->date_received,
+                'comments' => $request->comments,
+            ]);
+        }
 
-        return redirect('/payment')->with('message', 'Payment logged! Game marked as paid!');
+        return redirect('/payment')->with('success_message', 'Payment/s logged! Game marked as paid!');
     }
 
     /**
@@ -72,6 +82,13 @@ class PaymentController extends Controller
     public function show(Payment $payment)
     {
         $this->authorize('view', $payment);
+
+        $data = [
+            'pageTitle' => 'View Payment',
+            'payment' => $payment,
+        ];
+
+        return view('pages.payment.show-payment', $data);
     }
 
     /**
@@ -83,6 +100,13 @@ class PaymentController extends Controller
     public function edit(Payment $payment)
     {
         $this->authorize('view', $payment);
+
+        $data = [
+            'pageTitle' => 'Edit Payment',
+            'payment' => $payment,
+        ];
+
+        return view('pages.payment.edit-payment', $data);
     }
 
     /**
@@ -92,9 +116,21 @@ class PaymentController extends Controller
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payment $payment)
+    public function update(EditRequest $request, Payment $payment)
     {
         $this->authorize('update', $payment);
+
+        $newPayment = Payment::find($payment->id);
+
+        $newPayment->payer = $request->payer;
+        $newPayment->date_received = $request->date_received;
+        $newPayment->check_number = $request->check_number;
+        $newPayment->comments = $request->comments;
+        //$newPayment->game_id = $request->game_id; lock this
+
+        $newPayment->save();
+
+        return redirect('/payment')->with('success_message', 'Payment updated!');
     }
 
     /**

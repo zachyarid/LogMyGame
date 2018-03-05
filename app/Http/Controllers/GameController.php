@@ -38,11 +38,26 @@ class GameController extends Controller
      */
     public function create()
     {
+        $allteams = [];
+        $allhometeams = DB::table('games')->select('home_team')->distinct()->get();
+        $allawayteams = DB::table('games')->select('away_team')->distinct()->get();
+
+        foreach ($allhometeams as $team)
+        {
+            $allteams[] = $team->home_team;
+        }
+
+        foreach ($allawayteams as $team)
+        {
+            $allteams[] = $team->away_team;
+        }
+
         $data = [
             'pageTitle' => 'Log Game',
             'gametypes' => GameType::all(),
             'gamelocs' => GameLocation::all(),
             'ages' => DB::table('ages')->get(),
+            'allteams' => $allteams,
         ];
 
         return view('pages.game.log-game', $data);

@@ -149,7 +149,7 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="home_team" id="home_team" type="text"
-                                   class="form-control{{ $errors->has('home_team') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-teams{{ $errors->has('home_team') ? ' is-invalid' : '' }}"
                                    value="{{ $game->home_team }}"/>
 
                             @if ($errors->has('home_team'))
@@ -181,7 +181,7 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="away_team" id="away_team" type="text"
-                                   class="form-control{{ $errors->has('away_team') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-teams{{ $errors->has('away_team') ? ' is-invalid' : '' }}"
                                    value="{{ $game->away_team }}"/>
 
                             @if ($errors->has('away_team'))
@@ -223,7 +223,7 @@
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="center_name" id="center_name" type="text"
-                                   class="form-control{{ $errors->has('center_name') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-referees{{ $errors->has('center_name') ? ' is-invalid' : '' }}"
                                    value="{{ $game->center_name }}"/>
 
                             @if ($errors->has('center_name'))
@@ -238,7 +238,7 @@
                         <label class="col-sm-4 form-control-label" for="ar1_name">Assistant Referee 1: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="ar1_name" id="ar1_name" type="text"
-                                   class="form-control{{ $errors->has('ar1_name') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-referees{{ $errors->has('ar1_name') ? ' is-invalid' : '' }}"
                                    value="{{ $game->ar1_name }}"/>
 
                             @if ($errors->has('ar1_name'))
@@ -253,7 +253,7 @@
                         <label class="col-sm-4 form-control-label" for="ar2_name">Assistant Referee 2: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="ar2_name" id="ar2_name" type="text"
-                                   class="form-control{{ $errors->has('ar2_name') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-referees{{ $errors->has('ar2_name') ? ' is-invalid' : '' }}"
                                    value="{{ $game->ar2_name }}"/>
 
                             @if ($errors->has('ar2_name'))
@@ -268,7 +268,7 @@
                         <label class="col-sm-4 form-control-label" for="th_name">Fourth Official: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input name="th_name" id="th_name" type="text"
-                                   class="form-control{{ $errors->has('th_name') ? ' is-invalid' : '' }}"
+                                   class="form-control easy-ac-referees{{ $errors->has('th_name') ? ' is-invalid' : '' }}"
                                    value="{{ $game->th_name }}"/>
 
                             @if ($errors->has('th_name'))
@@ -358,6 +358,27 @@
             });
 
             $(".select2").select2();
+
+            var optionsTeams = {
+                url: '{{ route('json-teams') }}',
+                list: {
+                    match: {
+                        enabled: true
+                    }
+                }
+            };
+
+            var optionsReferees = {
+                url: '{{ route('json-referees') }}',
+                list: {
+                    match: {
+                        enabled: true
+                    }
+                }
+            };
+
+            $(".easy-ac-teams").easyAutocomplete(optionsTeams);
+            $(".easy-ac-referees").easyAutocomplete(optionsReferees);
         });
 
         function submitLocPost()

@@ -7,7 +7,8 @@
         @include('layouts.alert-danger')
     @endif
 
-    <form method="POST" action="{{ route('payment.store') }}">
+    <form method="POST" action="{{ route('payment.update', ['payment' => $payment->id]) }}">
+        @method('PUT')
         @csrf
 
         <div class="card pd-20 pd-sm-40">
@@ -19,21 +20,15 @@
                     <div class="col-lg-6">
                         <div class="form-group mg-b-20">
                             <label class="form-control-label">Game: <span class="tx-danger">*</span></label>
-                            <select name="game_id[]" id="game_id" {{ count($gameswithoutpay) == 0 ? '' : 'multiple' }}
-                                    class="form-control select2{{ $errors->has('game_id') ? ' is-invalid' : '' }}">
-                                @if (count($gameswithoutpay) > 0)
-                                    @foreach ($gameswithoutpay as $g)
-                                        <option value="{{ $g->id }}" {{ $g->id == old('game_id') ? 'selected' : '' }}>
-                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $g->date . $g->time)->format('M d, Y h:i A') }},
-                                            {{ $g->home_team }} vs {{ $g->away_team }}
-                                        </option>
-                                    @endforeach
-                                @else
-                                    <option selected disabled value="">All Games Paid!</option>
-                                @endif
+                            <select name="game_id" id="game_id"
+                            class="form-control select2{{ $errors->has('game_id') ? ' is-invalid' : '' }}">
+                                <option value="{{ $payment->game->id }}">
+                                    {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $payment->game->date . $payment->game->time)->format('M d, Y h:i A') }},
+                                    {{ $payment->game->home_team }} vs {{ $payment->game->away_team }}
+                                </option>
                             </select>
 
-                        @if ($errors->has('game_id'))
+                            @if ($errors->has('game_id'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('game_id') }}</strong>
                                 </span>
@@ -46,7 +41,7 @@
                             <label class="form-control-label">Check/Reference Number:</label>
                             <input name="check_number" id="check_number" type="number"
                                    class="form-control{{ $errors->has('check_number') ? ' is-invalid' : '' }}"
-                                   value="{{ old('check_number') }}"/>
+                                   value="{{ $payment->check_number }}"/>
 
                             @if ($errors->has('check_number'))
                                 <span class="invalid-feedback">
@@ -61,7 +56,7 @@
                             <label class="form-control-label">Payer: <span class="tx-danger">*</span></label>
                             <input name="payer" id="payer" type="text"
                                    class="form-control{{ $errors->has('payer') ? ' is-invalid' : '' }}"
-                                   value="{{ old('payer') }}"/>
+                                   value="{{ $payment->payer }}"/>
 
                             @if ($errors->has('payer'))
                                 <span class="invalid-feedback">
@@ -78,8 +73,9 @@
                                 <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
                                 <input name="date_received"
                                        class="form-control fc-datepicker{{ $errors->has('date_received') ? ' is-invalid' : '' }}"
-                                       value="{{ old('date_received') ? \Carbon\Carbon::createFromFormat('Y-m-d', old('date_received'))->format('m/d/Y') : '' }}" />
-                                <input type="hidden" name="date_received" id="date_receivedf" value="{{ old('date_received') }}" />
+                                       value="{{ \Carbon\Carbon::createFromFormat('Y-m-d', $payment->date_received)->format('m/d/Y') }}" />
+                                <input type="hidden" name="date_received" id="date_receivedf" value="{{ $payment->date_received }}" />
+
                                 @if ($errors->has('date_received'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('date_received') }}</strong>
@@ -94,7 +90,7 @@
                     <div class="col-lg-10">
                         <div class="form-group">
                             <label class="col-sm-4 form-control-label" for="comments">Payment Comments: </label>
-                            <textarea id="summernote-editor" name="comments">{{ old('comments') }}</textarea>
+                            <textarea id="summernote-editor" name="comments">{{ $payment->comments }}</textarea>
 
                             @if ($errors->has('comments'))
                                 <span class="invalid-feedback">
@@ -106,8 +102,8 @@
                 </div>
 
                 <div class="form-layout-footer">
-                    <button class="btn btn-default mg-r-5">Log Payment</button>
-                    <button class="btn btn-secondary" type="reset">Reset</button>
+                    <button class="btn btn-default mg-r-5">Edit Payment</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
                 </div><!-- form-layout-footer -->
             </div><!-- form-layout -->
         </div>
@@ -129,7 +125,9 @@
                 height: 150
             });
 
-            $(".select2").select2();
+            $(".select2").select2({
+                disabled: true
+            });
         });
     </script>
 @endsection
