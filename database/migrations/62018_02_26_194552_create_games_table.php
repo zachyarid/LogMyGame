@@ -16,13 +16,15 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            //$table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('mileage_id')->nullable(true)->unsigned();
+            $table->foreign('mileage_id')->references('id')->on('mileage');
             $table->date('date');
             $table->time('time');
             $table->integer('location_id')->unsigned();
-            //$table->foreign('location_id')->references('id')->on('game_locations');
+            $table->foreign('location_id')->references('id')->on('game_locations');
             $table->integer('age_id')->unsigned();
-            //$table->foreign('age_id')->references('id')->on('ages');
+            $table->foreign('age_id')->references('id')->on('ages');
             $table->string('home_team');
             $table->integer('home_team_score');
             $table->string('away_team');
@@ -38,6 +40,7 @@ class CreateGamesTable extends Migration
             $table->integer('type');
             $table->string('platform');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

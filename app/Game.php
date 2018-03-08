@@ -3,11 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Support\Facades\DB;
 
 class Game extends Model
 {
+    use LogsActivity, SoftDeletes;
+
     protected $guarded = ['created_at', 'updated_at', 'id'];
+    protected static $logAttributes = ['*'];
+    protected $dates = ['deleted_at'];
 
     public function user()
     {
@@ -24,9 +30,19 @@ class Game extends Model
         return $this->hasOne(GameType::class, 'id', 'type');
     }
 
+    public function age()
+    {
+        return $this->hasOne(Age::class, 'id', 'age_id');
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function mileage()
+    {
+        return $this->belongsTo(Mileage::class);
     }
 
     /* Returns whether or not a game has any payments */

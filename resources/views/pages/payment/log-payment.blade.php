@@ -11,9 +11,6 @@
         @csrf
 
         <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Enter Payment Details</h6>
-            <p class="mg-b-20 mg-sm-b-30"></p>
-
             <div class="form-layout">
                 <div class="row mg-b-5">
                     <div class="col-lg-6">
@@ -21,16 +18,12 @@
                             <label class="form-control-label">Game: <span class="tx-danger">*</span></label>
                             <select name="game_id[]" id="game_id" {{ count($gameswithoutpay) == 0 ? '' : 'multiple' }}
                                     class="form-control select2{{ $errors->has('game_id') ? ' is-invalid' : '' }}">
-                                @if (count($gameswithoutpay) > 0)
-                                    @foreach ($gameswithoutpay as $g)
-                                        <option value="{{ $g->id }}" {{ $g->id == old('game_id') ? 'selected' : '' }}>
-                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $g->date . $g->time)->format('M d, Y h:i A') }},
-                                            {{ $g->home_team }} vs {{ $g->away_team }}
-                                        </option>
-                                    @endforeach
-                                @else
-                                    <option selected disabled value="">All Games Paid!</option>
-                                @endif
+                                @foreach ($gameswithoutpay as $g)
+                                    <option value="{{ $g->id }}" {{ $g->id == old('game_id') ? 'selected' : '' }}>
+                                        {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $g->date . $g->time)->format('M d, Y h:i A') }},
+                                        {{ $g->home_team }} vs {{ $g->away_team }}
+                                    </option>
+                                @endforeach
                             </select>
 
                         @if ($errors->has('game_id'))

@@ -48,10 +48,14 @@
         </li><!-- nav-item -->
 
         <li class="nav-item">
-            <a href="{{ route('mileage.create') }}" class="nav-link">
+            <a href="" class="nav-link with-sub">
                 <i class="fa fa-automobile"></i>
-                <span>Log Mileage</span>
+                <span>Mileage Log</span>
             </a>
+            <ul class="nav-sub" style="display: none;">
+                <li class="nav-item"><a href="{{ route('mileage.pretrip') }}" class="nav-link">Start Pre-Trip</a></li>
+                <li class="nav-item"><a href="{{ route('mileage.create') }}" class="nav-link">Log Mileage</a></li>
+            </ul>
         </li><!-- nav-item -->
     </ul>
 </div><!-- kt-sideleft -->

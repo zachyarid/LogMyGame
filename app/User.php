@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-use App\Game;
+use Spatie\Activitylog\Traits\HasActivity;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasActivity, Notifiable;
+
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that are mass assignable.
@@ -32,6 +33,16 @@ class User extends Authenticatable
     public function games()
     {
         return $this->hasMany(Game::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function mileage()
+    {
+        return $this->hasMany(Mileage::class);
     }
 
 }

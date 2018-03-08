@@ -9,7 +9,7 @@
 
     <form id="pageForm">
         <!-- big row -->
-        <div class="row row-sm mg-t-20">
+        <div class="row row-sm">
             <div class="col-xl-6">
                 <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
                     <h6 class="card-body-title">Game Details</h6>

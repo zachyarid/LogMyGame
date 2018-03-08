@@ -26,8 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if (count($games) > 0)
-                    @foreach ($games as $g)
+                    @foreach (Auth::user()->games as $g)
                         <tr>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $g->date. ' '  . $g->time)->format('M d, Y H:i A') }}</td>
                             <td>{{ $g->home_team }} ({{ $g->home_team_score }})</td>
@@ -42,7 +41,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @endif
                 </tbody>
             </table>
         </div>

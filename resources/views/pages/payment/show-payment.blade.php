@@ -9,9 +9,6 @@
 
     <form id="pageForm">
         <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Payment Details</h6>
-            <p class="mg-b-20 mg-sm-b-30"></p>
-
             <div class="form-layout">
                 <div class="row mg-b-5">
                     <div class="col-lg-6">

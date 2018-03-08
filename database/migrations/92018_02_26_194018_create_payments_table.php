@@ -23,6 +23,7 @@ class CreatePaymentsTable extends Migration
             $table->date('date_received');
             $table->text('comments')->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -24,10 +24,12 @@ class MileageCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|numeric',
-            'game_id' => 'required|numeric',
-            'odometer_out' => 'required|numeric',
-            'odometer_in' => 'required|numeric',
+            'game_id' => 'required|array',
+            'date_travel' => 'date|before_or_equal:' . date('Y-m-d', time()),
+            'origin' => 'string|required',
+            'odometer_out' => 'required_with:odometer_in',
+            'odometer_in' => 'required_with:odometer_out',
+            'distance' => 'required_without_all:odometer_out,odometer_in',
         ];
     }
 }

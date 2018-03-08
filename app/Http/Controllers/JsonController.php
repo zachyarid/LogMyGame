@@ -31,19 +31,47 @@ class JsonController extends Controller
 
         // all centers
         $allcenters = DB::table('games')->select('center_name')->distinct()->get();
-
-        // all ar1s
-
-        // all ar2s
-
-        // all 4ths
-
-        // all users (fname . ' ' . lname)
-
-        // combine
         foreach ($allcenters as $c)
         {
-            $allrefs[] = $c->center_name;
+            if (!in_array($c->center_name, $allrefs)) {
+                $allrefs[] = $c->center_name;
+            }
+        }
+
+        // all ar1s
+        $allar1 = DB::table('games')->select('ar1_name')->distinct()->get();
+        foreach ($allar1 as $c)
+        {
+            if (!in_array($c->ar1_name, $allrefs)) {
+                $allrefs[] = $c->ar1_name;
+            }
+        }
+
+        // all ar2s
+        $allar2 = DB::table('games')->select('ar2_name')->distinct()->get();
+        foreach ($allar2 as $c)
+        {
+            if (!in_array($c->ar2_name, $allrefs)) {
+                $allrefs[] = $c->ar2_name;
+            }
+        }
+
+        // all 4ths
+        $allth = DB::table('games')->select('th_name')->distinct()->get();
+        foreach ($allth as $c)
+        {
+            if (!in_array($c->th_name, $allrefs)) {
+                $allrefs[] = $c->th_name;
+            }
+        }
+
+        // all users (fname . ' ' . lname)
+        $alluser = DB::table('users')->select(DB::raw('concat(fname, \' \', lname) as name'))->get();
+        foreach ($alluser as $c)
+        {
+            if (!in_array($c->name, $allrefs)) {
+                $allrefs[] = $c->name;
+            }
         }
 
         return $allrefs;

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Game;
 use App\GameLocation;
 use App\GameType;
+use App\Age;
 use App\Http\Requests\GameController\GameCreateRequest as CreateRequest;
 use App\Http\Requests\GameController\GameEditRequest as EditRequest;
 
@@ -25,7 +26,6 @@ class GameController extends Controller
     {
         $data = [
             'pageTitle' => 'View Games',
-            'games' => Game::where(['user_id' => \Auth::id()])->get(),
         ];
 
         return view('pages.game.view-game', $data);
@@ -56,7 +56,7 @@ class GameController extends Controller
             'pageTitle' => 'Log Game',
             'gametypes' => GameType::all(),
             'gamelocs' => GameLocation::all(),
-            'ages' => DB::table('ages')->get(),
+            'ages' => Age::all(),
             'allteams' => $allteams,
         ];
 
@@ -71,6 +71,9 @@ class GameController extends Controller
      */
     public function store(CreateRequest $request)
     {
+
+        // TODO: Make checkbox for payment received at game. This will autocreate a payment to eliminate a step
+        // TODO: Have a profile option to make this a default
         Game::create([
             'user_id' => \Auth::id(),
             'date' => $request->game_date,
@@ -112,7 +115,7 @@ class GameController extends Controller
             'game' => $game,
             'gametypes' => GameType::all(),
             'gamelocs' => GameLocation::all(),
-            'ages' => DB::table('ages')->get(),
+            'ages' => Age::all(),
         ];
 
         return view('pages.game.show-game', $data);
@@ -133,7 +136,7 @@ class GameController extends Controller
             'game' => $game,
             'gametypes' => GameType::all(),
             'gamelocs' => GameLocation::all(),
-            'ages' => DB::table('ages')->get(),
+            'ages' => Age::all(),
         ];
 
         return view('pages.game.edit-game', $data);

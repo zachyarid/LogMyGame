@@ -25,14 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $pd = [];
+        $payments = \Auth::user()->payments;
+        foreach ($payments as $p)
+        {
+            $pd[] = $p->game_id;
+        }
+
         $data = [
             'pageTitle' => 'Dashboard',
-            'games' => Game::where('user_id', \Auth::id())->limit(10)->get(),
-            'outstanding' => Game::whereNotExists(function ($query) {
-                                                    $query->select(DB::raw(1))
-                                                    ->from('payments')
-                                                    ->whereRaw('payments.game_id = games.id and payments.user_id = ' . \Auth::id());
-            })->where('user_id', \Auth::id())->get()
+            'games' => \Auth::user()->games, // TODO: This is not limiting like I'd like
+            'outstanding' => \Auth::user()->games->whereNotIn('id', $pd),
         ];
 
         return view('pages.home', $data);

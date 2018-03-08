@@ -23,8 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @if (count($payments) > 0)
-                    @foreach ($payments as $p)
+                    @foreach (Auth::user()->payments as $p)
                         <tr>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $p->created_at)->format('M d, Y') }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $p->date_received)->format('M d, Y') }}</td>
@@ -32,12 +31,11 @@
                             <td>{{ $p->check_number }}</td>
                             <td>
                                 <button class="btn btn-default" onclick="window.location = '{{ route('game.show', ['game' => $p->game_id]) }}'">View Game</button>
-                                <button class="btn btn-info" onclick="window.location = '{{ route('payment.edit', ['payment' => $p->id]) }}'">Edit</button>
-                                <button class="btn btn-success" onclick="window.location = '{{ route('payment.show', ['payment' => $p->id]) }}'">View Payment</button>
+                                <button class="btn btn-success" onclick="window.location = '{{ route('payment.edit', ['payment' => $p->id]) }}'">Edit</button>
+                                <button class="btn btn-info" onclick="window.location = '{{ route('payment.show', ['payment' => $p->id]) }}'">View Payment</button>
                             </td>
                         </tr>
                     @endforeach
-                @endif
                 </tbody>
             </table>
         </div>

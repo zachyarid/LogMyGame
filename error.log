@@ -43,3 +43,5 @@
 [Thu Mar 01 22:07:14.435514 2018] [ssl:warn] [pid 6906] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
 [Thu Mar 01 22:28:55.186146 2018] [ssl:warn] [pid 11552] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
 [Thu Mar 01 22:28:55.265639 2018] [ssl:warn] [pid 11552] AH01909: RSA certificate configured for logmygames.me:443 does NOT include an ID which matches the server name
+[Sat Mar 03 15:02:32.997498 2018] [php7:error] [pid 11655] [client 192.168.1.133:52594] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/zach/public_html/logmygames/storage/framework/views/d0022d7d21973e9e777165a2f8351d7f29f128a4.php on line 30
+[Sat Mar 03 15:03:37.043219 2018] [php7:error] [pid 3592] [client 192.168.1.133:52679] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/zach/public_html/logmygames/storage/framework/views/d0022d7d21973e9e777165a2f8351d7f29f128a4.php on line 29

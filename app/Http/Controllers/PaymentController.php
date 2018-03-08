@@ -25,7 +25,6 @@ class PaymentController extends Controller
     {
         $data = [
             'pageTitle' => 'View Payments',
-            'payments' => Payment::where('user_id', '=', \Auth::id())->get(),
         ];
 
         return view('pages.payment.view-payment', $data);
@@ -38,13 +37,21 @@ class PaymentController extends Controller
      */
     public function create()
     {
+        $pd = [];
+        $payments = \Auth::user()->payments;
+        foreach ($payments as $p)
+        {
+            $pd[] = $p->game_id;
+        }
+
         $data = [
             'pageTitle' => 'Log Payments',
-            'gameswithoutpay' => DB::table('games')->whereNotExists(function ($query) {
-                                    $query->select(DB::raw(1))
-                                          ->from('payments')
-                                          ->whereRaw('payments.game_id = games.id and payments.user_id = ' . \Auth::id());
-                                 })->where('user_id', \Auth::id())->get()
+//            'gameswithoutpay' => DB::table('games')->whereNotExists(function ($query) {
+//                $query->select(DB::raw(1))
+//                    ->from('payments')
+//                    ->whereRaw('payments.game_id = games.id and payments.user_id = ' . \Auth::id());
+//            })->where('user_id', \Auth::id())->get()
+            'gameswithoutpay' => \Auth::user()->games->whereNotIn('id', $pd),
         ];
 
         return view('pages.payment.log-payment', $data);
