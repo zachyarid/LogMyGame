@@ -14,12 +14,16 @@ class JsonController extends Controller
 
         foreach ($allhometeams as $team)
         {
-            $allteams[] = $team->home_team;
+            if (!in_array($team->home_team, $allteams)) {
+                $allteams[] = $team->home_team;
+            }
         }
 
         foreach ($allawayteams as $team)
         {
-            $allteams[] = $team->away_team;
+            if (!in_array($team->away_team, $allteams)) {
+                $allteams[] = $team->away_team;
+            }
         }
 
         return $allteams;

@@ -15,6 +15,7 @@
             <table id="game-log" class="table table-striped table-responsive">
                 <thead>
                     <tr>
+                        <th>Game ID</th>
                         <th>Date</th>
                         <th>Home Team (Score)</th>
                         <th>Away Team (Score)</th>
@@ -28,6 +29,7 @@
                 <tbody>
                     @foreach (Auth::user()->games as $g)
                         <tr>
+                            <td>{{ $g->id }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $g->date. ' '  . $g->time)->format('M d, Y H:i A') }}</td>
                             <td>{{ $g->home_team }} ({{ $g->home_team_score }})</td>
                             <td>{{ $g->away_team }} ({{ $g->away_team_score }})</td>
@@ -53,11 +55,20 @@
             $('#game-log').DataTable({
                 responsive: true,
                 bLengthChange: false,
+                aaSorting: [[ 0, "desc" ]],
                 language: {
                     searchPlaceholder: 'Search...',
                     sSearch: '',
                     lengthMenu: '_MENU_ items/page'
-                }
+                },
+                columnDefs: [
+                    { 'orderData': [0] },
+                    {
+                        'targets': [0],
+                        'visible': false,
+                        'searchable': false
+                    },
+                ]
             });
         });
     </script>

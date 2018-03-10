@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Game;
 use App\GameLocation;
 use App\GameType;
 use App\Age;
 use App\Http\Requests\GameController\GameCreateRequest as CreateRequest;
 use App\Http\Requests\GameController\GameEditRequest as EditRequest;
+use App\Payment;
 
 class GameController extends Controller
 {
@@ -38,26 +38,11 @@ class GameController extends Controller
      */
     public function create()
     {
-        $allteams = [];
-        $allhometeams = DB::table('games')->select('home_team')->distinct()->get();
-        $allawayteams = DB::table('games')->select('away_team')->distinct()->get();
-
-        foreach ($allhometeams as $team)
-        {
-            $allteams[] = $team->home_team;
-        }
-
-        foreach ($allawayteams as $team)
-        {
-            $allteams[] = $team->away_team;
-        }
-
         $data = [
             'pageTitle' => 'Log Game',
-            'gametypes' => GameType::all(),
-            'gamelocs' => GameLocation::all(),
+            'gametypes' => GameType::own()->default()->get(),
+            'gamelocs' => GameLocation::own()->default()->get(),
             'ages' => Age::all(),
-            'allteams' => $allteams,
         ];
 
         return view('pages.game.log-game', $data);
@@ -71,10 +56,9 @@ class GameController extends Controller
      */
     public function store(CreateRequest $request)
     {
+        $message = '';
 
-        // TODO: Make checkbox for payment received at game. This will autocreate a payment to eliminate a step
-        // TODO: Have a profile option to make this a default
-        Game::create([
+        $game = Game::create([
             'user_id' => \Auth::id(),
             'date' => $request->game_date,
             'time' => $request->game_time,
@@ -96,7 +80,21 @@ class GameController extends Controller
             'ussf_grade' => \Auth::user()->ussf_grade,
         ]);
 
-        return redirect('/game')->with('success_message', 'Game added!');
+        if ($request->payment_received)
+        {
+            Payment::create([
+                'game_id' => $game->id,
+                'user_id' => \Auth::id(),
+                'payer' => $request->home_team,
+                'check_number' => -1,
+                'date_received' => date('Y-m-d', time()),
+                'comments' => '<p>[System Generated] Payment auto-logged. Default to home team payer.</p>',
+            ]);
+
+            $message = ' Payment Logged!';
+        }
+
+        return redirect('/game')->with('success_message', 'Game added!' . $message);
 
     }
 
@@ -113,8 +111,8 @@ class GameController extends Controller
         $data = [
             'pageTitle' => 'View Game',
             'game' => $game,
-            'gametypes' => GameType::all(),
-            'gamelocs' => GameLocation::all(),
+            'gametypes' => GameType::own()->default()->get(),
+            'gamelocs' => GameLocation::own()->default()->get(),
             'ages' => Age::all(),
         ];
 
@@ -134,8 +132,8 @@ class GameController extends Controller
         $data = [
             'pageTitle' => 'Edit Game',
             'game' => $game,
-            'gametypes' => GameType::all(),
-            'gamelocs' => GameLocation::all(),
+            'gametypes' => GameType::own()->default()->get(),
+            'gamelocs' => GameLocation::own()->default()->get(),
             'ages' => Age::all(),
         ];
 

@@ -15,6 +15,7 @@
             <table id="payment-log" class="table table-striped table-responsive">
                 <thead>
                 <tr>
+                    <th>Payment ID</th>
                     <th>Log Date</th>
                     <th>Date Received</th>
                     <th>Payer</th>
@@ -25,6 +26,7 @@
                 <tbody>
                     @foreach (Auth::user()->payments as $p)
                         <tr>
+                            <td>{{ $p->id }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $p->created_at)->format('M d, Y') }}</td>
                             <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $p->date_received)->format('M d, Y') }}</td>
                             <td>{{ $p->payer }}</td>
@@ -48,11 +50,20 @@
             $('#payment-log').DataTable({
                 responsive: true,
                 bLengthChange: false,
+                aaSorting: [[ 0, "desc" ]],
                 language: {
                     searchPlaceholder: 'Search...',
                     sSearch: '',
                     lengthMenu: '_MENU_ items/page'
-                }
+                },
+                columnDefs: [
+                    { 'orderData': [0] },
+                    {
+                        'targets': [0],
+                        'visible': false,
+                        'searchable': false
+                    },
+                ]
             });
         });
     </script>

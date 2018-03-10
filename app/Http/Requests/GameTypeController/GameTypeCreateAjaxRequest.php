@@ -4,7 +4,7 @@ namespace App\Http\Requests\GameTypeController;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GameTypeCreateRequest extends FormRequest
+class GameTypeCreateAjaxRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,6 +27,9 @@ class GameTypeCreateRequest extends FormRequest
             'name' => 'required|string',
             'location' => 'required|string',
             'assignor' => 'required|string',
+            'hotel' => 'present|in:true,false',
+            'travel' => 'present|in:true,false',
+            'grade_premium' => 'present|in:true,false',
         ];
     }
 }

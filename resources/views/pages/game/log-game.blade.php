@@ -107,7 +107,7 @@
                     </div>
 
                     <div class="row mg-t-20">
-                        <label class="col-sm-4 form-control-label" for="age">Age: <span
+                        <label class="col-sm-4 form-control-label" for="age">Level/Age: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <select name="age" id="age"
@@ -141,7 +141,7 @@
                         <label class="col-sm-4 form-control-label" for="home_team">Home Team: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="home_team" id="home_team" type="text"
+                            <input name="home_team" id="home_team" type="text" autocomplete="off"
                                    class="form-control easy-ac-teams{{ $errors->has('home_team') ? ' is-invalid' : '' }}"
                                    value="{{ old('home_team') }}"/>
 
@@ -173,7 +173,7 @@
                         <label class="col-sm-4 form-control-label" for="away_team">Away Team: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="away_team" id="away_team" type="text"
+                            <input name="away_team" id="away_team" type="text" autocomplete="off"
                                    class="form-control easy-ac-teams{{ $errors->has('away_team') ? ' is-invalid' : '' }}"
                                    value="{{ old('away_team') }}"/>
 
@@ -215,7 +215,7 @@
                         <label class="col-sm-4 form-control-label" for="center_name">Center: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="center_name" id="center_name" type="text"
+                            <input name="center_name" id="center_name" type="text" autocomplete="off"
                                    class="form-control easy-ac-referees{{ $errors->has('center_name') ? ' is-invalid' : '' }}"
                                    value="{{ old('center_name') }}"/>
 
@@ -230,7 +230,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="ar1_name">Assistant Referee 1: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="ar1_name" id="ar1_name" type="text"
+                            <input name="ar1_name" id="ar1_name" type="text" autocomplete="off"
                                    class="form-control easy-ac-referees{{ $errors->has('ar1_name') ? ' is-invalid' : '' }}"
                                    value="{{ old('ar1_name') }}"/>
 
@@ -245,7 +245,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="ar2_name">Assistant Referee 2: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="ar2_name" id="ar2_name" type="text"
+                            <input name="ar2_name" id="ar2_name" type="text" autocomplete="off"
                                    class="form-control easy-ac-referees{{ $errors->has('ar2_name') ? ' is-invalid' : '' }}"
                                    value="{{ old('ar2_name') }}"/>
 
@@ -260,7 +260,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="th_name">Fourth Official: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="th_name" id="th_name" type="text"
+                            <input name="th_name" id="th_name" type="text" autocomplete="off"
                                    class="form-control easy-ac-referees{{ $errors->has('th_name') ? ' is-invalid' : '' }}"
                                    value="{{ old('th_name') }}"/>
 
@@ -327,9 +327,21 @@
 
         <!-- another row -->
         <div class="card pd-20 pd-sm-40 mg-t-20">
-            <div class="form-layout-footer">
-                <button class="btn btn-default mg-r-5">Log Game</button>
-                <button type="reset" class="btn btn-secondary" >Reset Form</button>
+            <div class="row">
+                <div class="col-lg-2">
+                    <button class="btn btn-default">Log Game</button>
+                </div>
+
+                <div class="col-lg-2 mg-t-10">
+                    <label class="ckbox">
+                        <input type="checkbox" name="payment_received" id="payment_received">
+                        <span>Payment Received</span>
+                    </label>
+                </div>
+
+                <div class="col-lg-2 mg-l-25">
+                    <button type="reset" class="btn btn-secondary" >Reset Form</button>
+                </div>
             </div><!-- form-layout-footer -->
         </div>
     </form>
@@ -387,7 +399,16 @@
                 },
                 success: function (data) {
                     console.log(data);
-                    location.reload();
+
+                    $("#gamelocmodal").modal("hide");
+
+                    $("#location option").remove();
+
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        $("#location").append($("<option></option>").attr("value", data[i].id).text(data[i].location));
+                    }
+                    $("#location option:last").attr("selected", "selected");
                 },
                 error: function(data) {
                     console.log(data);
@@ -400,9 +421,9 @@
             var gameloc = $('#location_addd').val();
             var name = $('#name_add').val();
             var assignor = $('#assignor_add').val();
-            var hotel = $('#hotel').val();
-            var travel = $('#travel').val();
-            var grade_prem = $('#grade_prem').val();
+            var hotel = $('#hotel').prop('checked');
+            var travel = $('#travel').prop('checked');
+            var grade_prem = $('#grade_prem').prop('checked');
 
             $.ajax({
                 type: "POST",
@@ -418,7 +439,16 @@
                 },
                 success: function (data) {
                     console.log(data);
-                    location.reload();
+
+                    $("#gametypemodal").modal("hide");
+
+                    $("#game_type option").remove();
+
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        $("#game_type").append($("<option></option>").attr("value", data[i].id).text(data[i].name));
+                    }
+                    $("#game_type option:last").attr("selected", "selected");
                 },
                 error: function(data) {
                     console.log(data);
@@ -451,7 +481,6 @@
                         <label for="assignor_add">Assignor:</label>
                         <input name="assignor_add" id="assignor_add" class="form-control wd-100p" />
                     </div>
-                    <!-- TODO: Figure out why these are always ON -->
                     <label class="ckbox">
                         <input type="checkbox" name="hotel" id="hotel">
                         <span>Hotel</span>

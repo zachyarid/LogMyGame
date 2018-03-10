@@ -112,7 +112,7 @@
                     </div>
 
                     <div class="row mg-t-20">
-                        <label class="col-sm-4 form-control-label" for="age">Age: <span
+                        <label class="col-sm-4 form-control-label" for="age">Level/Age: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <select name="age" id="age"
@@ -148,7 +148,7 @@
                         <label class="col-sm-4 form-control-label" for="home_team">Home Team: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="home_team" id="home_team" type="text"
+                            <input name="home_team" id="home_team" type="text" autocomplete="off"
                                    class="form-control easy-ac-teams{{ $errors->has('home_team') ? ' is-invalid' : '' }}"
                                    value="{{ $game->home_team }}"/>
 
@@ -180,7 +180,7 @@
                         <label class="col-sm-4 form-control-label" for="away_team">Away Team: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="away_team" id="away_team" type="text"
+                            <input name="away_team" id="away_team" type="text" autocomplete="off"
                                    class="form-control easy-ac-teams{{ $errors->has('away_team') ? ' is-invalid' : '' }}"
                                    value="{{ $game->away_team }}"/>
 
@@ -222,7 +222,7 @@
                         <label class="col-sm-4 form-control-label" for="center_name">Center: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="center_name" id="center_name" type="text"
+                            <input name="center_name" id="center_name" type="text" autocomplete="off"
                                    class="form-control easy-ac-referees{{ $errors->has('center_name') ? ' is-invalid' : '' }}"
                                    value="{{ $game->center_name }}"/>
 
@@ -237,7 +237,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="ar1_name">Assistant Referee 1: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="ar1_name" id="ar1_name" type="text"
+                            <input name="ar1_name" id="ar1_name" type="text" autocomplete="off"
                                    class="form-control easy-ac-referees{{ $errors->has('ar1_name') ? ' is-invalid' : '' }}"
                                    value="{{ $game->ar1_name }}"/>
 
@@ -252,7 +252,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="ar2_name">Assistant Referee 2: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="ar2_name" id="ar2_name" type="text"
+                            <input name="ar2_name" id="ar2_name" type="text" autocomplete="off"
                                    class="form-control easy-ac-referees{{ $errors->has('ar2_name') ? ' is-invalid' : '' }}"
                                    value="{{ $game->ar2_name }}"/>
 
@@ -267,7 +267,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="th_name">Fourth Official: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="th_name" id="th_name" type="text"
+                            <input name="th_name" id="th_name" type="text" autocomplete="off"
                                    class="form-control easy-ac-referees{{ $errors->has('th_name') ? ' is-invalid' : '' }}"
                                    value="{{ $game->th_name }}"/>
 
@@ -387,14 +387,23 @@
 
             $.ajax({
                 type: "POST",
-                url: '/gamelocation/add',
+                url: '{{ route('add-gameloc') }}',
                 data: {
                     location: gameloc,
                     _token: '{{ csrf_token() }}'
                 },
                 success: function (data) {
                     console.log(data);
-                    location.reload();
+
+                    $("#gamelocmodal").modal("hide");
+
+                    $("#location option").remove();
+
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        $("#location").append($("<option></option>").attr("value", data[i].id).text(data[i].location));
+                    }
+                    $("#location option:last").attr("selected", "selected");
                 },
                 error: function(data) {
                     console.log(data);
@@ -413,7 +422,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '/gametype/add',
+                url: '{{ route('add-gametype') }}',
                 data: {
                     name: name,
                     location: gameloc,
@@ -425,7 +434,16 @@
                 },
                 success: function (data) {
                     console.log(data);
-                    location.reload();
+
+                    $("#gametypemodal").modal("hide");
+
+                    $("#game_type option").remove();
+
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        $("#game_type").append($("<option></option>").attr("value", data[i].id).text(data[i].name));
+                    }
+                    $("#game_type option:last").attr("selected", "selected");
                 },
                 error: function(data) {
                     console.log(data);

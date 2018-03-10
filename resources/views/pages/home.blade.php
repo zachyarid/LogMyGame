@@ -71,7 +71,7 @@
                             @foreach ($outstanding as $game)
                                 <tr>
                                     <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $game->date . ' ' . $game->time)->format('M d, Y h:i A') }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($game->date)->diffInDays(\Carbon\Carbon::now()) }} days</td>
+                                    <td>{{ \Carbon\Carbon::parse($game->date)->diffInDays(\Carbon\Carbon::now()) }}</td>
                                     <td>{{ $game->home_team }}</td>
                                     <td>{{ $game->away_team }}</td>
                                     <td>$ {{ $game->game_fee }}</td>
@@ -94,10 +94,21 @@
 @section('script-source')
     <script>
         $(document).ready(function () {
-            $('.table').DataTable({
+            $('#recent-games').DataTable({
                 responsive: true,
                 bLengthChange: false,
                 aaSorting: [[ 0, "desc" ]],
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '',
+                    lengthMenu: '_MENU_ items/page'
+                }
+            });
+
+            $('#outstanding-payments').DataTable({
+                responsive: true,
+                bLengthChange: false,
+                aaSorting: [[ 1, "desc" ]],
                 language: {
                     searchPlaceholder: 'Search...',
                     sSearch: '',

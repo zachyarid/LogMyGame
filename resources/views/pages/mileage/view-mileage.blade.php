@@ -68,7 +68,7 @@
                     lengthMenu: '_MENU_ items/page'
                 },
                 columnDefs: [
-                    { 'orderData':[0] },
+                    { 'orderData': [0] },
                     {
                         'targets': [0],
                         'visible': false,
@@ -84,7 +84,7 @@
 
             if (result) {
                 $.ajax({
-                    type: "DELETE",
+                    type: 'POST',
                     url: '{{ url('/mileage') }}/' + id,
                     data: {
                         _method: 'DELETE',

@@ -45,4 +45,14 @@ class User extends Authenticatable
         return $this->hasMany(Mileage::class);
     }
 
+    public function gamelocs()
+    {
+        return $this->hasMany(GameLocation::class);
+    }
+
+    public function gametypes()
+    {
+        return $this->hasMany(GameType::class);
+    }
+
 }

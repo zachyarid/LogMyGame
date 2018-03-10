@@ -30,6 +30,8 @@
                 <li class="nav-item"><a href="{{ route('game.index') }}" class="nav-link">Games</a></li>
                 <li class="nav-item"><a href="{{ route('payment.index') }}" class="nav-link">Payments</a></li>
                 <li class="nav-item"><a href="{{ route('mileage.index') }}" class="nav-link">Mileage Logs</a></li>
+                <li class="nav-item"><a href="{{ route('gametype.index') }}" class="nav-link">Game Types</a></li>
+                <li class="nav-item"><a href="{{ route('gamelocation.index') }}" class="nav-link">Game Locations</a></li>
             </ul>
         </li>
 
