@@ -20,6 +20,11 @@ class Game extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeOwn($query)
+    {
+        return $query->where(['user_id' => \Auth::id()]);
+    }
+
     public function gameloc()
     {
         return $this->hasOne(GameLocation::class, 'id', 'location_id');
