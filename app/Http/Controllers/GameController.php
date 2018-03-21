@@ -6,9 +6,10 @@ use App\Game;
 use App\GameLocation;
 use App\GameType;
 use App\Age;
+use App\Payment;
 use App\Http\Requests\GameController\GameCreateRequest as CreateRequest;
 use App\Http\Requests\GameController\GameEditRequest as EditRequest;
-use App\Payment;
+use Exception;
 
 class GameController extends Controller
 {
@@ -58,27 +59,42 @@ class GameController extends Controller
     {
         $message = '';
 
-        $game = Game::create([
-            'user_id' => \Auth::id(),
-            'date' => $request->game_date,
-            'time' => $request->game_time,
-            'location_id' => $request->location,
-            'age_id' => $request->age,
-            'home_team' => $request->home_team,
-            'home_team_score' => $request->home_score,
-            'away_team' => $request->away_team,
-            'away_team_score' => $request->away_score,
-            'center_name' => $request->center_name,
-            'ar1_name' => $request->ar1_name,
-            'ar2_name' => $request->ar2_name,
-            'th_name' => $request->th_name,
-            'comments' => $request->comments,
-            'game_fee' => $request->game_fee,
-            'miles_run' => $request->miles_run,
-            'type' => $request->game_type,
-            'platform' => $request->platform,
-            'ussf_grade' => \Auth::user()->ussf_grade,
-        ]);
+        try {
+            $game = Game::create([
+                'user_id' => \Auth::id(),
+                'date' => $request->game_date,
+                'time' => $request->game_time,
+                'location_id' => $request->location,
+                'age_id' => $request->age,
+                'home_team' => $request->home_team,
+                'home_team_score' => $request->home_score,
+                'away_team' => $request->away_team,
+                'away_team_score' => $request->away_score,
+                'center_name' => $request->center_name,
+                'ar1_name' => $request->ar1_name,
+                'ar2_name' => $request->ar2_name,
+                'th_name' => $request->th_name,
+                'comments' => $request->comments,
+                'game_fee' => $request->game_fee,
+                'miles_run' => $request->miles_run,
+                'type' => $request->game_type,
+                'platform' => $request->platform,
+                'ussf_grade' => \Auth::user()->ussf_grade,
+            ]);
+        }
+        catch (Exception $e)
+        {
+            switch ($e->getCode())
+            {
+                case 23000:
+                    $errorMessage = "A game already exists at that date and time. Check the details and try again";
+                    break;
+                default:
+                    $errorMessage = "An unknown error has occurred";
+                    break;
+            }
+            return redirect('/game')->with('fail_message', $errorMessage)->withInput();
+        }
 
         if ($request->payment_received)
         {

@@ -25,6 +25,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('referees', 'JsonController@showAllReferees')->name('json-referees');
     });
 
+    Route::prefix('export')->group(function () {
+        Route::get('', 'ExportController@index')->name('export.index');
+        Route::post('games', 'ExportController@exportGames')->name('export.games');
+        Route::post('mileage', 'ExportController@exportMileage')->name('export.mileage');
+        Route::post('payments', 'ExportController@exportPayments')->name('export.payments');
+    });
+
+    Route::prefix('import')->group(function () {
+        Route::get('', 'ImportController@index')->name('import.index');
+        Route::post('games', 'ImportController@importGames')->name('import.games');
+        Route::get('instructions', 'ImportController@instructions')->name('import.instructions');
+    });
+
     // Custom with Resource
     Route::prefix('mileage')->group(function () {
         Route::get('pre-trip', 'MileageController@preTrip')->name('mileage.pretrip');

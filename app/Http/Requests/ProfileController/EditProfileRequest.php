@@ -28,6 +28,7 @@ class EditProfileRequest extends FormRequest
             'lname' => 'required|string',
             'email' => 'required|email',
             'ussf_grade' => 'required|numeric',
+            'default_origin' => 'string',
             'current_password' => 'required_with_all:password,password_confirmation',
             'password' => 'required_with_all:current_password,password_confirmation|confirmed',
             'password_confirmation' => 'required_with_all:current_password,password',

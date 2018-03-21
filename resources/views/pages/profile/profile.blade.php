@@ -14,7 +14,7 @@
             <div class="col-md-4 col-lg-3">
                 <label class="content-left-label">Your Profile Photo</label>
                 <figure class="edit-profile-photo">
-                    <img src="https://pmo.reliaset.com/uploads/staff_profile_images/2/profile.jpg" class="img-fluid" alt="">
+                    <img src="{{ $profile_path }}" class="img-fluid" alt="">
                 </figure>
                 <label class="custom-file">
                     <input type="file" id="profile_pic" name="profile_pic" class="custom-file-input">
@@ -123,6 +123,19 @@
                                 @if ($errors->has('ussf_grade'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('ussf_grade') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Default Origin:</label>
+                            <div class="col-sm-8 col-xl-6 mg-t-10 mg-sm-t-0">
+                                <input class="form-control{{ $errors->has('default_origin') ? ' is-invalid' : '' }}"
+                                       type="text" name="default_origin" value="{{ Auth::user()->default_origin }}">
+
+                                @if ($errors->has('default_origin'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('default_origin') }}</strong>
                                     </span>
                                 @endif
                             </div>

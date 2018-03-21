@@ -92,9 +92,9 @@
                                 @if (count($gamelocs) > 0)
                                     @foreach ($gamelocs as $loc)
                                         @if ($loc->id == $game->location_id)
-                                            <option selected value="{{ $loc->id }}">{{ $loc->location }}</option>
+                                            <option selected value="{{ $loc->id }}" {{ $loc->disabled ? 'disabled readonly' : '' }}>{{ $loc->location }}</option>
                                         @else
-                                            <option value="{{ $loc->id }}">{{ $loc->location }}</option>
+                                            <option value="{{ $loc->id }}" {{ $loc->disabled ? 'disabled readonly' : '' }}>{{ $loc->location }}</option>
                                         @endif
                                     @endforeach
                                 @endif
@@ -121,9 +121,9 @@
                                 @if (count($ages) > 0)
                                     @foreach ($ages as $a)
                                         @if ($a->id == $game->age_id)
-                                            <option selected value="{{ $a->id }}">{{ $a->string }}</option>
+                                            <option selected value="{{ $a->id }}" {{ $a->disabled ? 'disabled readonly' : '' }}>{{ $a->string }}</option>
                                         @else
-                                            <option value="{{ $a->id }}">{{ $a->string }}</option>
+                                            <option value="{{ $a->id }}" {{ $a->disabled ? 'disabled readonly' : '' }}>{{ $a->string }}</option>
                                         @endif
                                     @endforeach
                                 @endif

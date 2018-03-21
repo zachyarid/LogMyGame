@@ -74,19 +74,19 @@ class MileageController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        foreach ($request->game_id as $id) {
-            // One
-            $mileage = Mileage::create([
-                'user_id' => \Auth::id(),
-                'origin' => $request->origin,
-                'date_travel' => $request->date_travel,
-                'odometer_out' => $request->odometer_out,
-                'odometer_in' => $request->odometer_in,
-                'distance' => is_null($request->odometer_in) && is_null($request->odometer_out) ? (int) $request->distance : (int) $request->odometer_in - (int) $request->odometer_out,
-                'comments' => $request->comments,
-                'status' => 'comp',
-            ]);
+        // One
+        $mileage = Mileage::create([
+            'user_id' => \Auth::id(),
+            'origin' => $request->origin,
+            'date_travel' => $request->date_travel,
+            'odometer_out' => $request->odometer_out,
+            'odometer_in' => $request->odometer_in,
+            'distance' => is_null($request->odometer_in) && is_null($request->odometer_out) ? (int) $request->distance : (int) $request->odometer_in - (int) $request->odometer_out,
+            'comments' => $request->comments,
+            'status' => 'comp',
+        ]);
 
+        foreach ($request->game_id as $id) {
             // Many
             $game = Game::find($id);
             $game->mileage_id = $mileage->id;

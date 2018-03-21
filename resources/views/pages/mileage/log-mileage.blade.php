@@ -60,7 +60,7 @@
                             <label class="form-control-label">Origin:<span class="tx-danger">*</span></label>
                             <input name="origin" id="origin" type="text"
                                    class="form-control{{ $errors->has('origin') ? ' is-invalid' : '' }}"
-                                   value="{{ old('origin') }}" />
+                                   value="{{ old('origin') ? old('origin') : Auth::user()->default_origin }}" />
 
                             @if ($errors->has('origin'))
                                 <span class="invalid-feedback">

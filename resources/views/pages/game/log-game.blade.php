@@ -61,9 +61,11 @@
                                 <option selected disabled value="">Select a Game Type</option>
                                 @if (count($gametypes) > 0)
                                     @foreach ($gametypes as $type)
-                                        <option value="{{ $type->id }}" {{ $type->id == old('game_type') ? 'selected' : '' }}>
-                                            {{ $type->name }}
-                                        </option>
+                                        @if (!$type->disabled)
+                                            <option value="{{ $type->id }}" {{ $type->id == old('game_type') ? 'selected' : '' }}>
+                                                {{ $type->name }}
+                                            </option>
+                                        @endif
                                     @endforeach
                                 @endif
                             </select>
@@ -88,9 +90,11 @@
                                 <option selected disabled value="">Select a Location</option>
                                 @if (count($gamelocs) > 0)
                                     @foreach ($gamelocs as $loc)
-                                        <option value="{{ $loc->id }}" {{ $loc->id == old('location') ? 'selected' : '' }}>
-                                            {{ $loc->location }}
-                                        </option>
+                                        @if (!$loc->disabled)
+                                            <option value="{{ $loc->id }}" {{ $loc->id == old('location') ? 'selected' : '' }}>
+                                                {{ $loc->location }}
+                                            </option>
+                                        @endif
                                     @endforeach
                                 @endif
                             </select>
@@ -115,9 +119,11 @@
                                 <option selected disabled value="">Select an Age</option>
                                 @if (count($ages) > 0)
                                     @foreach ($ages as $a)
-                                        <option value="{{ $a->id }}" {{ $a->id == old('age') ? 'selected' : '' }}>
-                                            {{ $a->string }}
-                                        </option>
+                                        @if (!$a->disabled)
+                                            <option value="{{ $a->id }}" {{ $a->id == old('age') ? 'selected' : '' }}>
+                                                {{ $a->string }}
+                                            </option>
+                                        @endif
                                     @endforeach
                                 @endif
                             </select>

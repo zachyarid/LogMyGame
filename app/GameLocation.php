@@ -9,7 +9,7 @@ class GameLocation extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['location', 'user_id'];
+    protected $fillable = ['location', 'user_id', 'comments'];
     protected static $logAttributes = ['*'];
 
     public function user()

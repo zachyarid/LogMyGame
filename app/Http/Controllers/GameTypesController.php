@@ -56,6 +56,7 @@ class GameTypesController extends Controller
             'hotel' => $request->hotel == 'on' ? 'true' : 'false',
             'travel' => $request->travel == 'on' ? 'true' : 'false',
             'grade_premium' => $request->grade_premium == 'on' ? 'true' : 'false',
+            'comments' => $request->comments,
             'user_id' => \Auth::id(),
         ]);
 
@@ -96,6 +97,7 @@ class GameTypesController extends Controller
         $newType->hotel = $request->hotel == 'on' ? 'true' : 'false';
         $newType->travel = $request->travel == 'on' ? 'true' : 'false';
         $newType->grade_premium = $request->grade_premium == 'on' ? 'true' : 'false';
+        $newType->comments = $request->comments;
 
         $newType->save();
 

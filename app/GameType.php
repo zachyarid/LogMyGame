@@ -9,7 +9,7 @@ class GameType extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['name', 'location', 'assignor', 'hotel', 'travel', 'grade_premium', 'user_id'];
+    protected $fillable = ['name', 'location', 'assignor', 'hotel', 'travel', 'grade_premium', 'user_id', 'comments'];
     protected static $logAttributes = ['*'];
 
     public function user()

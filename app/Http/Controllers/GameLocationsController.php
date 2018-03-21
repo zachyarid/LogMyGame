@@ -35,6 +35,7 @@ class GameLocationsController extends Controller
     {
         GameLocation::create([
             'location' => $request->location,
+            'comments' => $request->comments,
             'user_id' => \Auth::id(),
         ]);
 
@@ -80,6 +81,7 @@ class GameLocationsController extends Controller
         $newLoc = GameLocation::find($gamelocation->id);
 
         $newLoc->location = $request->location;
+        $newLoc->comments = $request->comments;
         $newLoc->save();
 
         return redirect('/gamelocation')->with('success_message', 'Game location updated!');

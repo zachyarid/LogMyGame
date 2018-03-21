@@ -71,7 +71,7 @@ class PaymentController extends Controller
                 'user_id' => \Auth::id(),
                 'game_id' => $id,
                 'payer' => $request->payer,
-                'check_number' => $request->check,
+                'check_number' => $request->check_number,
                 'date_received' => $request->date_received,
                 'comments' => $request->comments,
             ]);
@@ -137,7 +137,7 @@ class PaymentController extends Controller
 
         $newPayment->save();
 
-        return redirect('/payment')->with('success_message', 'Payment updated!');
+        return back()->with('success_message', 'Payment updated!');
     }
 
     /**

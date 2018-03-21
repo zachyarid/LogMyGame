@@ -29,10 +29,35 @@
                     </div><!-- col-4 -->
                 </div>
 
+                <div class="row mg-b-25">
+                    <div class="col-lg-10">
+                        <div class="form-group">
+                            <label class="col-sm-4 form-control-label" for="comments">Comments: </label>
+                            <textarea id="summernote-editor" name="comments">{{ old('comments') }}</textarea>
+
+                            @if ($errors->has('comments'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('comments') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div><!-- col-10 -->
+                </div>
+
                 <div class="form-layout-footer">
                     <button class="btn btn-default mg-r-5">Create Game Location</button>
                 </div><!-- form-layout-footer -->
             </div><!-- form-layout -->
         </div>
     </form>
+@endsection
+
+@section('script-source')
+    <script>
+        $(document).ready(function () {
+            $('#summernote-editor').summernote({
+                height: 150
+            });
+        });
+    </script>
 @endsection

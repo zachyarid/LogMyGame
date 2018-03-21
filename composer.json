@@ -10,6 +10,7 @@
         "hisorange/browser-detect": "^3.1",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
+        "maatwebsite/excel": "^2.1",
         "spatie/laravel-activitylog": "^2.5"
     },
     "require-dev": {

@@ -14,14 +14,14 @@ class JsonController extends Controller
 
         foreach ($allhometeams as $team)
         {
-            if (!in_array($team->home_team, $allteams)) {
+            if (!in_array($team->home_team, $allteams) && $team->home_team !== null) {
                 $allteams[] = $team->home_team;
             }
         }
 
         foreach ($allawayteams as $team)
         {
-            if (!in_array($team->away_team, $allteams)) {
+            if (!in_array($team->away_team, $allteams) && $team->away_team !== null) {
                 $allteams[] = $team->away_team;
             }
         }
@@ -37,7 +37,7 @@ class JsonController extends Controller
         $allcenters = DB::table('games')->select('center_name')->distinct()->get();
         foreach ($allcenters as $c)
         {
-            if (!in_array($c->center_name, $allrefs)) {
+            if (!in_array($c->center_name, $allrefs) && $c->center_name !== null) {
                 $allrefs[] = $c->center_name;
             }
         }
@@ -46,7 +46,7 @@ class JsonController extends Controller
         $allar1 = DB::table('games')->select('ar1_name')->distinct()->get();
         foreach ($allar1 as $c)
         {
-            if (!in_array($c->ar1_name, $allrefs)) {
+            if (!in_array($c->ar1_name, $allrefs) && $c->ar1_name !== null) {
                 $allrefs[] = $c->ar1_name;
             }
         }
@@ -55,7 +55,7 @@ class JsonController extends Controller
         $allar2 = DB::table('games')->select('ar2_name')->distinct()->get();
         foreach ($allar2 as $c)
         {
-            if (!in_array($c->ar2_name, $allrefs)) {
+            if (!in_array($c->ar2_name, $allrefs) && $c->ar2_name !== null) {
                 $allrefs[] = $c->ar2_name;
             }
         }
@@ -64,7 +64,7 @@ class JsonController extends Controller
         $allth = DB::table('games')->select('th_name')->distinct()->get();
         foreach ($allth as $c)
         {
-            if (!in_array($c->th_name, $allrefs)) {
+            if (!in_array($c->th_name, $allrefs) && $c->th_name !== null) {
                 $allrefs[] = $c->th_name;
             }
         }

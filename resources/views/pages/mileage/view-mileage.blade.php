@@ -9,6 +9,9 @@
 
     <div class="card pd-20 pd-sm-40">
         <div class="table-responsive">
+            <div class="col-md-1">
+                <button class="btn btn-default" onclick="window.location = '{{ route('mileage.create') }}'">Log Mileage</button>
+            </div>
             <table id="payment-log" class="table table-striped table-responsive">
                 <thead>
                 <tr>
