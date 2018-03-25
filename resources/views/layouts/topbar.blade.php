@@ -16,6 +16,7 @@
                     <li><a href="{{ route('profile') }}"><i class="icon ion-ios-person-outline"></i> My Profile</a></li>
                     <li><a href="{{ route('import.index') }}"><i class="icon ion-upload"></i> Import Data</a></li>
                     <li><a href="{{ route('export.index') }}"><i class="icon ion-archive"></i> Export Data</a></li>
+                    <li><a href="{{ route('help.index') }}"><i class="icon ion-search"></i> Help</a></li>
                     <li><a href="{{ route('logout') }}"><i class="icon ion-power"></i> Sign Out</a></li>
                 </ul>
             </div><!-- dropdown-menu -->

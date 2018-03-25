@@ -64,7 +64,7 @@ class ImportController extends Controller
                                 return back()->with('fail_message', $e->getMessage());
                             }
 
-                            if ($datetime->diffInDays(Carbon::now()) > 0)
+                            if ($datetime->diffInDays(Carbon::now(), false) < 0)
                             {
                                 $message = 'Game import failed. Future games not allowed. No games have been imported.';
                                 return back()->with('fail_message', $message);
@@ -126,9 +126,9 @@ class ImportController extends Controller
                             } catch (Exception $e) {
                                 return back()->with('fail_message', $e->getMessage());
                             }
-                            $diff = $datetime->diffInDays(Carbon::now());
+                            $diff = $datetime->diffInDays(Carbon::now(), false);
 
-                            if ($diff > 0)
+                            if ($diff < 0)
                             {
                                 $message = 'Game import failed! Future games not allowed. No games have been imported.';
                                 return back()->with('fail_message', $message);

@@ -38,6 +38,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('instructions', 'ImportController@instructions')->name('import.instructions');
     });
 
+    Route::prefix('help')->group(function () {
+        Route::get('', 'HelpController@index')->name('help.index');
+        Route::get('faq', 'HelpController@faq')->name('help.faq');
+    });
+
     // Custom with Resource
     Route::prefix('mileage')->group(function () {
         Route::get('pre-trip', 'MileageController@preTrip')->name('mileage.pretrip');
