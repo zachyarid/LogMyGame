@@ -12,41 +12,43 @@
             <div class="col-md-1">
                 <button class="btn btn-default" onclick="window.location = '{{ route('gametype.create') }}'">Add A New Game Type</button>
             </div>
-            <table id="game-types" class="table table-striped table-responsive">
-                <thead>
-                <tr>
-                    <th>Type ID</th>
-                    <th>Name</th>
-                    <th>Location</th>
-                    <th>Assignor</th>
-                    <th>Hotel</th>
-                    <th>Travel</th>
-                    <th>Grade Premium</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach ($gametypes as $g)
-                        <tr>
-                            <td>{{ $g->id }}</td>
-                            <td>{{ $g->name }}</td>
-                            <td>{{ $g->location }}</td>
-                            <td>{{ $g->assignor }}</td>
-                            <td>{{ $g->hotel == 'true' ? 'Yes' : 'No' }}</td>
-                            <td>{{ $g->travel == 'true' ? 'Yes' : 'No' }}</td>
-                            <td>{{ $g->grade_premium == 'true' ? 'Yes' : 'No' }}</td>
-                            <td>
-                                <button class="btn btn-default" onclick="window.location = '{{ route('gametype.games-used', ['type' => $g->id]) }}'">View Games Used</button>
+            <div class="table-responsive">
+                <table id="game-types" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Type ID</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Assignor</th>
+                        <th>Hotel</th>
+                        <th>Travel</th>
+                        <th>Grade Premium</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($gametypes as $g)
+                            <tr>
+                                <td>{{ $g->id }}</td>
+                                <td>{{ $g->name }}</td>
+                                <td>{{ $g->location }}</td>
+                                <td>{{ $g->assignor }}</td>
+                                <td>{{ $g->hotel == 'true' ? 'Yes' : 'No' }}</td>
+                                <td>{{ $g->travel == 'true' ? 'Yes' : 'No' }}</td>
+                                <td>{{ $g->grade_premium == 'true' ? 'Yes' : 'No' }}</td>
+                                <td>
+                                    <button class="btn btn-default" onclick="window.location = '{{ route('gametype.games-used', ['type' => $g->id]) }}'">View Games Used</button>
 
-                                @if ($g->is_default == 0)
-                                    <button class="btn btn-success" onclick="window.location = '{{ route('gametype.edit', ['gametype' => $g->id]) }}'">Edit</button>
-                                    <button class="btn btn-danger" onclick="doCancel({{ $g->id }})">Remove</button>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                    @if ($g->is_default == 0)
+                                        <button class="btn btn-success" onclick="window.location = '{{ route('gametype.edit', ['gametype' => $g->id]) }}'">Edit</button>
+                                        <button class="btn btn-danger" onclick="doCancel({{ $g->id }})">Remove</button>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

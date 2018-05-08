@@ -26,7 +26,7 @@ class PaymentCreateRequest extends FormRequest
         return [
             'game_id' => 'required|array|exists:games,id',
             'payer' => 'required|string',
-            'check_number' => 'string',
+            'check_number' => 'nullable',
             'date_received' => 'required|date|before_or_equal:' . date('Y-m-d', time()),
             'comment' => 'string',
         ];

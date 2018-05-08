@@ -12,49 +12,46 @@
             <div class="col-md-1">
                 <button class="btn btn-default" onclick="window.location = '{{ route('mileage.create') }}'">Log Mileage</button>
             </div>
-            <table id="payment-log" class="table table-striped table-responsive">
-                <thead>
-                <tr>
-                    <th>Log ID</th>
-                    <th>Log Date</th>
-                    <th>Origin</th>
-                    <th>Odometer Out</th>
-                    <th>Odometer In</th>
-                    <th>Mileage</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (Auth::user()->mileage as $m)
+            <div class="table-responsive">
+                <table id="payment-log" class="table table-striped">
+                    <thead>
                     <tr>
-                        <td>{{ $m->id }}</td>
-                        <td>{{ \Carbon\Carbon::parse($m->created_at)->format('M d, Y h:i A') }}</td>
-                        <td>{{ $m->origin }}</td>
-                        <td>{{ $m->odometer_out }}</td>
-                        <td>{{ $m->odometer_in }}</td>
-                        <td>{{ $m->distance }}</td>
-                        <td>
-                            @if ($m->status == 'pre')
-                                Pre-Mileage Log
-                            @elseif ($m->status == 'comp')
-                                Complete
-                            @endif
-                        </td>
-                        <td>
-                            @if ($m->status == 'pre')
-                                <button class="btn btn-default" onclick="window.location = '{{ route('mileage.edit', ['mileage' => $m->id]) }}'">Complete Mileage Log</button>
-                                <button class="btn btn-danger" onclick="doCancel({{ $m->id }})">Cancel Mileage Log</button>
-                            @elseif ($m->status == 'comp')
-                                <button class="btn btn-success" onclick="window.location = '{{ route('mileage.edit', ['mileage' => $m->id]) }}'">Edit Mileage Log</button>
-                                <button class="btn btn-info" onclick="window.location = '{{ route('mileage.show', ['mileage' => $m->id]) }}'">View Mileage Log</button>
-                            @endif
-                        </td>
+                        <th>Trip Date</th>
+                        <th>Destination</th>
+                        <th>Odometer Out</th>
+                        <th>Odometer In</th>
+                        <th>Mileage</th>
+                        <th>Potential Write Off *</th>
+                        <th></th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach (Auth::user()->mileage as $m)
+                        <tr>
+                            <td>{{ \Carbon\Carbon::parse($m->date_travel)->format('M d, Y') }}</td>
+                            <td>{{ isset($m->games[0]) ? $m->games[0]->gameloc->location : 'No Linked Games' }}</td>
+                            <td>{{ $m->odometer_out }}</td>
+                            <td>{{ $m->odometer_in }}</td>
+                            <td>{{ $m->distance }}</td>
+                            <td>
+                                ${{ number_format($m->distance * 0.545,2) }}
+                            </td>
+                            <td>
+                                @if ($m->status == 'pre')
+                                    <button class="btn btn-default" onclick="window.location = '{{ route('mileage.edit', ['mileage' => $m->id]) }}'">Complete Mileage Log</button>
+                                    <button class="btn btn-danger" onclick="doCancel({{ $m->id }})">Cancel Mileage Log</button>
+                                @elseif ($m->status == 'comp')
+                                    <button class="btn btn-success" onclick="window.location = '{{ route('mileage.edit', ['mileage' => $m->id]) }}'">Edit Mileage Log</button>
+                                    <button class="btn btn-info" onclick="window.location = '{{ route('mileage.show', ['mileage' => $m->id]) }}'">View Mileage Log</button>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <p>* Based on 2018 IRS Mileage Rate of 54.5 cents / mile</p>
     </div>
 @endsection
 
@@ -64,20 +61,12 @@
             $('#payment-log').DataTable({
                 responsive: true,
                 bLengthChange: false,
-                aaSorting: [[ 0, "desc" ]],
+                aaSorting: [],
                 language: {
                     searchPlaceholder: 'Search...',
                     sSearch: '',
                     lengthMenu: '_MENU_ items/page'
-                },
-                columnDefs: [
-                    { 'orderData': [0] },
-                    {
-                        'targets': [0],
-                        'visible': false,
-                        'searchable': false
-                    },
-                ],
+                }
             });
         });
 

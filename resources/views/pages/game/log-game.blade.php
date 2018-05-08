@@ -25,8 +25,8 @@
                                 <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
                                 <input name="game_date"
                                        class="form-control fc-datepicker{{ $errors->has('game_date') ? ' is-invalid' : '' }}"
-                                       value="{{ old('game_date') ? \Carbon\Carbon::createFromFormat('Y-m-d', old('game_date'))->format('m/d/Y') : '' }}">
-                                <input type="hidden" name="game_date" id="game_datef" value="{{ old('game_date') }}" />
+                                       value="{{ old('game_date') ? \Carbon\Carbon::createFromFormat('Y-m-d', old('game_date'))->format('m/d/Y') : \Carbon\Carbon::now()->format('m/d/Y') }}">
+                                <input type="hidden" name="game_date" id="game_datef" value="{{ old('game_date') ? old('game_date') : \Carbon\Carbon::now()->format('Y-m-d') }}" />
                                 @if ($errors->has('game_date'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('game_date') }}</strong>
@@ -282,7 +282,7 @@
                         <label class="col-sm-4 form-control-label" for="game_fee">Game Fee: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="game_fee" id="game_fee" type="number"
+                            <input name="game_fee" id="game_fee"
                                    class="form-control{{ $errors->has('game_fee') ? ' is-invalid' : '' }}"
                                    value="{{ old('game_fee') }}"/>
 
@@ -303,7 +303,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="miles_run">Distance Run: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="miles_run" id="miles_run" type="number"
+                            <input name="miles_run" id="miles_run"
                                    class="form-control{{ $errors->has('miles_run') ? ' is-invalid' : '' }}"
                                    value="{{ old('miles_run') }}"/>
 

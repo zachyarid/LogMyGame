@@ -81,7 +81,7 @@ class MileageController extends Controller
             'date_travel' => $request->date_travel,
             'odometer_out' => $request->odometer_out,
             'odometer_in' => $request->odometer_in,
-            'distance' => is_null($request->odometer_in) && is_null($request->odometer_out) ? (int) $request->distance : (int) $request->odometer_in - (int) $request->odometer_out,
+            'distance' => is_null($request->odometer_in) && is_null($request->odometer_out) ? (double) $request->distance : (int) $request->odometer_in - (int) $request->odometer_out,
             'comments' => $request->comments,
             'status' => 'comp',
         ]);

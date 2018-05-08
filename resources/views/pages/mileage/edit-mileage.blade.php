@@ -109,7 +109,7 @@
                     <div class="col-lg-2">
                         <div class="form-group mg-b-20">
                             <label class="form-control-label">Distance Traveled:</label>
-                            <input name="distance" id="distance" type="number"
+                            <input name="distance" id="distance"
                                    class="form-control{{ $errors->has('distance') ? ' is-invalid' : '' }}"
                                    value="{{ $mileage->distance }}"/>
 

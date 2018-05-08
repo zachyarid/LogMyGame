@@ -19,14 +19,14 @@
                             <select name="game_id[]" id="game_id" {{ count($gameswithoutpay) == 0 ? '' : 'multiple' }}
                                     class="form-control select2{{ $errors->has('game_id') ? ' is-invalid' : '' }}">
                                 @foreach ($gameswithoutpay as $g)
-                                    <option value="{{ $g->id }}" {{ $g->id == old('game_id') ? 'selected' : '' }}>
+                                    <option value="{{ $g->id }}" {{ $g->id == old('game_id') ? 'selected' : isset($game->id) ? $game->id == $g->id ? 'selected' : '' : '' }}>
                                         {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $g->date . $g->time)->format('M d, Y h:i A') }},
                                         {{ $g->home_team }} vs {{ $g->away_team }}
                                     </option>
                                 @endforeach
                             </select>
 
-                        @if ($errors->has('game_id'))
+                            @if ($errors->has('game_id'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('game_id') }}</strong>
                                 </span>
@@ -71,8 +71,8 @@
                                 <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
                                 <input name="date_received"
                                        class="form-control fc-datepicker{{ $errors->has('date_received') ? ' is-invalid' : '' }}"
-                                       value="{{ old('date_received') ? \Carbon\Carbon::createFromFormat('Y-m-d', old('date_received'))->format('m/d/Y') : '' }}" />
-                                <input type="hidden" name="date_received" id="date_receivedf" value="{{ old('date_received') }}" />
+                                       value="{{ old('date_received') ? \Carbon\Carbon::createFromFormat('Y-m-d', old('date_received'))->format('m/d/Y') : \Carbon\Carbon::now()->format('m/d/Y') }}" />
+                                <input type="hidden" name="date_received" id="date_receivedf" value="{{ old('date_received') ? old('date_received') : \Carbon\Carbon::now()->format('Y-m-d') }}" />
                                 @if ($errors->has('date_received'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('date_received') }}</strong>

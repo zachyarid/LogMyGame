@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Mail\Welcome;
 
 class RegisterController extends Controller
 {
@@ -51,7 +54,7 @@ class RegisterController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'ussf_grade' => 'min:0|max:9',
+            'ussf_grade' => 'nullable|in:1,2,3,4,5,6,7,8,9,7A',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -64,12 +67,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'email' => $data['email'],
             'ussf_grade' => ($data['ussf_grade'] == null ? 0 : $data['ussf_grade']),
             'password' => bcrypt($data['password']),
         ]);
+
+        return $user;
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        Mail::to($user->email)
+            ->send(new Welcome($user));
     }
 }

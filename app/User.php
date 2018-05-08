@@ -11,6 +11,7 @@ class User extends Authenticatable
     use HasActivity, Notifiable;
 
     protected static $logAttributes = ['*'];
+    protected static $logOnlyDirty = true;
 
     /**
      * The attributes that are mass assignable.
@@ -32,17 +33,22 @@ class User extends Authenticatable
 
     public function games()
     {
-        return $this->hasMany(Game::class);
+        return $this->hasMany(Game::class)->orderByDesc('date');
+    }
+
+    public function limitGames()
+    {
+        return $this->hasMany(Game::class)->orderByDesc('date')->limit(10);
     }
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class)->orderByDesc('created_at');
     }
 
     public function mileage()
     {
-        return $this->hasMany(Mileage::class);
+        return $this->hasMany(Mileage::class)->orderByDesc('date_travel');
     }
 
     public function gamelocs()
@@ -54,5 +60,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(GameType::class);
     }
-
 }

@@ -6,7 +6,7 @@
 <meta name="description" content="A simple, convenient way to log your games">
 <meta name="author" content="Zach Yarid">
 
-<title>{{ env('APP_NAME') }}</title>
+<title>{{ config('app.name') }}</title>
 
 <!-- vendor css -->
 <link href="{{ url('/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -20,6 +20,7 @@
 <link href="{{ url('/lib/medium-editor/default.css') }}" rel="stylesheet">
 <link href="{{ url('/lib/easyautocomplete/easy-autocomplete.css') }}" rel="stylesheet">
 <link href="{{ url('/lib/SpinKit/spinkit.css') }}" rel="stylesheet">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 
 <!-- Katniss CSS -->

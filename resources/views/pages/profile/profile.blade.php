@@ -20,7 +20,13 @@
                     <input type="file" id="profile_pic" name="profile_pic" class="custom-file-input">
                     <span class="custom-file-control"></span>
                 </label>
+
+                <label class="content-left-label mg-t-20">Email Preferences</label>
+                <label for="email_toggle" class="mg-t-15">Emails: </label>
+                <input id="email_toggle" name="email_toggle" type="checkbox" {{ Auth::user()->email_toggle ? 'checked' : '' }} data-toggle="toggle" data-onstyle="primary" />
+                <a href="{{ route('profile.email') }}" class="btn btn-default mg-l-10">Edit Preferences</a>
             </div><!-- col-3 -->
+
             <div class="col-md-8 col-lg-9 mg-t-30 mg-md-t-0">
                 <label class="content-left-label">Login Information</label>
                 <div class="card bg-gray-200 bd-0">
@@ -118,7 +124,7 @@
                             <label class="col-sm-3 form-control-label">USSF Grade:</label>
                             <div class="col-sm-8 col-xl-6 mg-t-10 mg-sm-t-0">
                                 <input class="form-control{{ $errors->has('ussf_grade') ? ' is-invalid' : '' }}"
-                                       type="number" name="ussf_grade" value="{{ Auth::user()->ussf_grade }}">
+                                       name="ussf_grade" value="{{ Auth::user()->ussf_grade }}">
 
                                 @if ($errors->has('ussf_grade'))
                                     <span class="invalid-feedback">

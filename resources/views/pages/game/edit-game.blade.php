@@ -283,7 +283,7 @@
                         <label class="col-sm-4 form-control-label" for="game_fee">Game Fee: <span
                                     class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="game_fee" id="game_fee" type="number"
+                            <input name="game_fee" id="game_fee"
                                    class="form-control{{ $errors->has('game_fee') ? ' is-invalid' : '' }}"
                                    value="{{ $game->game_fee }}"/>
 
@@ -304,7 +304,7 @@
                     <div class="row mg-t-20">
                         <label class="col-sm-4 form-control-label" for="miles_run">Distance Run: </label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input name="miles_run" id="miles_run" type="number"
+                            <input name="miles_run" id="miles_run"
                                    class="form-control{{ $errors->has('miles_run') ? ' is-invalid' : '' }}"
                                    value="{{ $game->miles_run }}"/>
 

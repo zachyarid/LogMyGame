@@ -99,7 +99,8 @@
                             </li>
                         </ol>
                     </div>
-            </div><!-- card -->
-        </div><!-- accordion -->
+                </div><!-- card -->
+            </div><!-- accordion -->
+        </div>
     </div>
 @endsection
