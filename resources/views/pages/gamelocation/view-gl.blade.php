@@ -12,31 +12,33 @@
             <div class="col-md-1">
                 <button class="btn btn-default" onclick="window.location = '{{ route('gamelocation.create') }}'">Add A New Game Location</button>
             </div>
-            <table id="game-locs" class="table table-striped table-responsive">
-                <thead>
-                <tr>
-                    <th>Location ID</th>
-                    <th>Location</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($gamelocs as $g)
+            <div class="table-responsive">
+                <table id="game-locs" class="table table-striped">
+                    <thead>
                     <tr>
-                        <td>{{ $g->id }}</td>
-                        <td>{{ $g->location }}</td>
-                        <td>
-                            <button class="btn btn-default" onclick="window.location = '{{ route('gamelocation.games-used', ['type' => $g->id]) }}'">View Games Used</button>
-
-                            @if ($g->is_default == 0)
-                                <button class="btn btn-success" onclick="window.location = '{{ route('gamelocation.edit', ['gametype' => $g->id]) }}'">Edit</button>
-                                <button class="btn btn-danger" onclick="doCancel({{ $g->id }})">Remove</button>
-                            @endif
-                        </td>
+                        <th>Location ID</th>
+                        <th>Location</th>
+                        <th></th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach ($gamelocs as $g)
+                        <tr>
+                            <td>{{ $g->id }}</td>
+                            <td>{{ $g->location }}</td>
+                            <td>
+                                <button class="btn btn-default" onclick="window.location = '{{ route('gamelocation.games-used', ['type' => $g->id]) }}'">View Games Used</button>
+
+                                @if ($g->is_default == 0)
+                                    <button class="btn btn-success" onclick="window.location = '{{ route('gamelocation.edit', ['gametype' => $g->id]) }}'">Edit</button>
+                                    <button class="btn btn-danger" onclick="doCancel({{ $g->id }})">Remove</button>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

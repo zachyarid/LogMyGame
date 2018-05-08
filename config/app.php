@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        'nickurt\AbuseIpDb\ServiceProvider',
 
         /*
          * Application Service Providers...
@@ -211,6 +212,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Spactivity' => Spatie\Activitylog\Models\Activity::class,
+        'AbuseIpDb' => 'nickurt\AbuseIpDb\Facade',
     ],
 
 ];

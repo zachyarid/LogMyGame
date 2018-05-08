@@ -22,3 +22,4 @@
 <script src="{{ url('/js/katniss.js')}}"></script>
 <script src="{{ url('/js/ResizeSensor.js')}}"></script>
 <script src="{{ url('/js/dashboard.js')}}"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>

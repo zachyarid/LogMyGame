@@ -18,7 +18,7 @@
                             <label class="form-control-label">Game: <span class="tx-danger">*</span></label>
                             <select name="game_id[]" id="game_id" {{ count(Auth::user()->games) == 0 ? '' : 'multiple' }}
                             class="form-control select2{{ $errors->has('game_id') ? ' is-invalid' : '' }}">
-                                @foreach (Auth::user()->games as $g)
+                                @foreach (App\Game::own()->orderBy('date', 'desc')->get() as $g)
                                     <option value="{{ $g->id }}" {{ $g->id == old('game_id') ? 'selected' : '' }}>
                                         {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $g->date . $g->time)->format('M d, Y h:i A') }},
                                         {{ $g->home_team }} vs {{ $g->away_team }}
@@ -41,8 +41,8 @@
                                 <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
                                 <input name="date_travel"
                                        class="form-control fc-datepicker{{ $errors->has('date_travel') ? ' is-invalid' : '' }}"
-                                       value="{{ old('date_travel') ? \Carbon\Carbon::createFromFormat('Y-m-d', old('date_travel'))->format('m/d/Y') : '' }}" />
-                                <input type="hidden" name="date_travel" id="date_travelf" value="{{ old('date_travel') }}" />
+                                       value="{{ old('date_travel') ? \Carbon\Carbon::createFromFormat('Y-m-d', old('date_travel'))->format('m/d/Y') : \Carbon\Carbon::now()->format('m/d/Y') }}" />
+                                <input type="hidden" name="date_travel" id="date_travelf" value="{{ old('date_travel') ? old('date_travel') : \Carbon\Carbon::now()->format('Y-m-d') }}" />
 
                                 @if ($errors->has('date_travel'))
                                     <span class="invalid-feedback">
@@ -112,7 +112,7 @@
                     <div class="col-lg-2">
                         <div class="form-group mg-b-20">
                             <label class="form-control-label">Distance Traveled:</label>
-                            <input name="distance" id="distance" type="number"
+                            <input name="distance" id="distance"
                                    class="form-control{{ $errors->has('distance') ? ' is-invalid' : '' }}"
                                    value="{{ old('distance') }}"/>
 

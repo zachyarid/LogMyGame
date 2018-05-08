@@ -16,10 +16,23 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('/profile', 'ProfileController@index')->name('profile');
-    Route::post('/profile', 'ProfileController@update')->name('profile.update');
+    Route::get('/mail', function() {
+        $game = App\Game::find([57, 58, 59])->sortBy('date');
+        $mileage = App\Mileage::find([])->sortByDesc('date_travel');
+
+        //dd($game);
+
+        return new App\Mail\InviteUser(\Auth::user(),  substr(sha1(time()), 0, 12));
+    });
 
     // Custom Routes
+    Route::prefix('profile')->group(function () {
+        Route::get('', 'ProfileController@index')->name('profile');
+        Route::post('', 'ProfileController@update')->name('profile.update');
+        Route::get('/email', 'ProfileController@emailPreferences')->name('profile.email');
+        Route::post('/email', 'ProfileController@storeEmailPreferences')->name('profile.email-store');
+    });
+
     Route::prefix('json')->group(function () {
         Route::get('teams', 'JsonController@showAllTeams')->name('json-teams');
         Route::get('referees', 'JsonController@showAllReferees')->name('json-referees');
@@ -38,6 +51,25 @@ Route::middleware(['auth'])->group(function () {
         Route::get('instructions', 'ImportController@instructions')->name('import.instructions');
     });
 
+    Route::prefix('help')->group(function () {
+        Route::get('', 'HelpController@index')->name('help.index');
+        Route::get('faq', 'HelpController@faq')->name('help.faq');
+        Route::get('add-gt-gl', 'HelpController@addglgt')->name('help.add-gt-gl');
+        Route::post('inquiry', 'HelpController@storeInquiry')->name('help.inquiry');
+        Route::get('game-tutorial', 'HelpController@gameTutorial')->name('help.gameTutorial');
+        Route::get('payment-tutorial', 'HelpController@paymentTutorial')->name('help.paymentTutorial');
+        Route::get('mileage-tutorial', 'HelpController@mileageTutorial')->name('help.mileageTutorial');
+        Route::get('{inquiry}', 'HelpController@viewInquiry');
+    });
+
+    Route::middleware(\App\Http\Middleware\IsAdministrator::class)->group(function () {
+        Route::prefix('admin')->group(function () {
+            Route::get('', 'AdminController@index')->name('admin.index');
+            Route::post('invite', 'AdminController@invite')->name('admin.invite');
+            Route::post('dashboard-msg', 'AdminController@dboardMsg')->name('admin.dboardmsg');
+        });
+    });
+
     // Custom with Resource
     Route::prefix('mileage')->group(function () {
         Route::get('pre-trip', 'MileageController@preTrip')->name('mileage.pretrip');
@@ -53,6 +85,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('gamelocation')->group(function () {
         Route::post('add/ajax', 'GameLocationsController@storeAjax')->name('add-gameloc');
         Route::get('gamesused/{location}', 'GameLocationsController@viewGamesUsed')->name('gamelocation.games-used');
+    });
+
+    Route::prefix('payment')->group(function () {
+        Route::get('add/{game}', 'PaymentController@createWithGame')->name('payment.add-game');
     });
 
     Route::resource('game', 'GameController');

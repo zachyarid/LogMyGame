@@ -34,8 +34,9 @@ class HomeController extends Controller
 
         $data = [
             'pageTitle' => 'Dashboard',
-            'games' => \Auth::user()->games, // TODO: This is not limiting like I'd like
+            'games' => \Auth::user()->limitGames,
             'outstanding' => \Auth::user()->games->whereNotIn('id', $pd),
+            'dashboardMessage' => DB::table('config')->where('key', 'dashboardMessage')->get()[0]->value,
         ];
 
         return view('pages.home', $data);

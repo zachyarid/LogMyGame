@@ -1,6 +1,6 @@
 <!-- ##### SIDEBAR LOGO ##### -->
 <div class="kt-sideleft-header">
-    <div class="kt-logo"><a href="{{ route('home') }}">{{ env('APP_NAME') }}</a></div>
+    <div class="kt-logo"><a href="{{ route('home') }}">{{ config('app.name') }}</a></div>
     <div id="ktDate" class="kt-date-today"></div>
     <div class="input-group kt-input-search">
         <input type="text" class="form-control" placeholder="Search...">
@@ -14,6 +14,15 @@
 <div class="kt-sideleft">
     <label class="kt-sidebar-label">Navigation</label>
     <ul class="nav kt-sideleft-menu">
+        @if (\Auth::user()->is_admin)
+            <li class="nav-item">
+                <a href="{{ route('admin.index') }}" class="nav-link">
+                    <i class="fa fa-gear"></i>
+                    <span>Administration Panel</span>
+                </a>
+            </li><!-- nav-item -->
+        @endif
+
         <li class="nav-item">
             <a href="{{ route('home') }}" class="nav-link">
                 <i class="icon ion-ios-home-outline"></i>

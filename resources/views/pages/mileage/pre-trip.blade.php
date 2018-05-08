@@ -20,7 +20,7 @@
                             <label class="form-control-label">Origin:</label>
                             <input name="origin" id="origin" type="text"
                                    class="form-control{{ $errors->has('origin') ? ' is-invalid' : '' }}"
-                                   value="{{ old('origin') }}"/>
+                                   value="{{ $errors->has('origin') ? old('origin') : Auth::user()->default_origin }}"/>
 
                             @if ($errors->has('origin'))
                                 <span class="invalid-feedback">

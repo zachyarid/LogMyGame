@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Jobs\ProcessMileageSummaryEmails;
+use App\Jobs\ProcessOutstandingPaymentEmails;
+use App\Jobs\ProcessGameSummaryEmails;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->job(new ProcessGameSummaryEmails)->twiceDaily(12, 13);
+        $schedule->job(new ProcessOutstandingPaymentEmails)->twiceDaily(12, 13);
+        $schedule->job(new ProcessMileageSummaryEmails)->twiceDaily(12, 13);
     }
 
     /**

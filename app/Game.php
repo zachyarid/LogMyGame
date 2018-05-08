@@ -53,6 +53,6 @@ class Game extends Model
     /* Returns whether or not a game has any payments */
     public function hasPayments()
     {
-        return !DB::table('payments')->where('game_id', $this->id)->get()->isEmpty();
+        return DB::table('payments')->where('game_id', $this->id)->exists();
     }
 }
