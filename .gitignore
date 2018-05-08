@@ -15,3 +15,4 @@ error.log
 policy
 public/css/app.css
 public/js/app.js
+worker.log
